@@ -9,7 +9,7 @@ See the right section for each challenge and solution!
 Two steps:
 
 ```PowerShell
-./build/paket.exe install
+./paket.exe install
 fsi Challenges/Challenge_[DATE].fsx
 ```
 
