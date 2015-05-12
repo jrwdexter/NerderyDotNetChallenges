@@ -15,6 +15,13 @@ let challenges = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "../challenges
                  |> Seq.mapi (fun i c -> path (sprintf "/issue-%d" (i+1)) >>= file (sprintf "../Challenges/%s" c.Name))
                  |> Seq.toList
 
+let config = 
+    let port = System.Environment.GetEnvironmentVariable("PORT")
+    { defaultConfig with 
+        logger = Logging.Loggers.saneDefaultsFor Logging.LogLevel.Verbose
+        bindings=[ (if port = null then HttpBinding.mk' HTTP  "127.0.0.1" 8083
+                    else HttpBinding.mk' HTTP  "0.0.0.0" (int32 port)) ] }
+
 let app : WebPart =
   choose [
     GET >>= choose (challenges |> List.append [
