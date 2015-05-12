@@ -1,6 +1,6 @@
 #if BOOTSTRAP
 System.Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
-#r "build/packet.exe"
+#r "build/paket.exe"
 Paket.Dependencies.Install (System.IO.File.ReadAllText "build/paket.dependencies")
 #endif
 
