@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>.NET Challenge for May 5, 2015
+</title>
+  <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link href="/styles.css" rel="stylesheet">
+</head>
+<body>
+<a href="https://github.com/mandest/NerderyDotNetChallenges"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
+  <div class="container">
+    <div class="masthead">
+      <ul class="nav nav-pills pull-right">
+        <li><a href="https://dotnet.nerderylabs.com/">Challenges</a></li>
+      </ul>
+      <h3><a href="/" class="muted">Nerdery .NET Challenges in </a>F#</h3>
+    </div>
+    <div class="row">
+      <div class="span9">
+        <div class="markdown-body">
+          <h1>.NET Challenge for May 5, 2015</h1>
+
+<h2>Prompt</h2>
+
+<p>We’ll keep things simple for the first .NET code challenge.
+Calculate 100 Fibonacci Numbers.</p>
+
+<p>Bonus points for using memoization to optimize the calculation.
+The best entry (as arbitrarily decided by me rolling dice) will get accolades in next week’s .NET newsletter.</p>
+
+<h2>Coding</h2>
+
+<h3>Step One: The Fibonacci method</h3>
+
+<p><code>x</code> and <code>y</code> are the two numbers to perform the Fibonacci addition on.
+Unfold creates an infinite series, which essentially can be modeled as the following:
+Assuming we have a fold like <code>Seq.unfold mySuperFunction</code>,
+the THIRD element of that sequence would be
+<code>mySuperFunction(mySuperFunction(mySuperFunction(input)))</code>.</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="f">sequence</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="f">unfold</span> (<span class="k">fun</span> (<span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">x</span>, <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">y</span>) <span class="k">-&gt;</span> 
+  <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="p">Some</span>(<span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="i">x</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="i">y</span>, (<span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="i">y</span>, <span onmouseout="hideTip(event, 'fs4', 10)" onmouseover="showTip(event, 'fs4', 10)" class="i">x</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs5', 11)" onmouseover="showTip(event, 'fs5', 11)" class="i">y</span>))) <span class="c">// Return the tuple (nextValue, state)</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<h3>Step Two: Print our output</h3>
+
+<p>We'll take 100 elements, starting from the pair (1,1)</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+(<span onmouseout="hideTip(event, 'fs7', 12)" onmouseover="showTip(event, 'fs7', 12)" class="f">decimal</span>(<span class="n">0</span>), <span onmouseout="hideTip(event, 'fs7', 13)" onmouseover="showTip(event, 'fs7', 13)" class="f">decimal</span>(<span class="n">1</span>)) <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs1', 14)" onmouseover="showTip(event, 'fs1', 14)" class="f">sequence</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 15)" onmouseover="showTip(event, 'fs2', 15)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 16)" onmouseover="showTip(event, 'fs8', 16)" class="f">take</span> <span class="n">100</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 17)" onmouseover="showTip(event, 'fs2', 17)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="f">iter</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs4', 19)" onmouseover="showTip(event, 'fs4', 19)" class="i">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs10', 20)" onmouseover="showTip(event, 'fs10', 20)" class="f">printfn</span> <span class="s">&quot;</span><span class="pf">%M</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs4', 21)" onmouseover="showTip(event, 'fs4', 21)" class="i">x</span>) 
+</pre>
+</td>
+</tr>
+</table>
+
+<h2>Result</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip" lang="f#">1
+2
+3
+5
+...
+354224848179261915075
+573147844013817084101
+</pre></td></tr></table>
+
+        </div>
+      </div>
+      <div class="span3">
+        <ul class="nav nav-list">
+          <li class="nav-header">Issues</li>
+          <li><a href="/">Home</a></li>
+          <li class="divider"></li>
+          <li><a href="/issue-1">Issue 1 - Fibonacci</a></li>
+          <li><a href="/issue-2">Issue 2 - Hashing</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
