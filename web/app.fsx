@@ -1,3 +1,9 @@
+#if BOOTSTRAP
+System.Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
+#r "build/packet.exe"
+Paket.Dependencies.Install (System.IO.File.ReadAllText "../build/paket.dependencies")
+#endif
+
 #r "../build/packages/Suave/lib/net40/Suave.dll"
 open Suave
 open Suave.Http
