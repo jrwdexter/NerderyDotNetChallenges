@@ -4,6 +4,7 @@ System.Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 Paket.Dependencies.Install (System.IO.File.ReadAllText "build/paket.dependencies")
 #endif
 
+#I "build/packages/Suave/lib/net40"
 #r "build/packages/Suave/lib/net40/Suave.dll"
 open Suave
 open Suave.Http
