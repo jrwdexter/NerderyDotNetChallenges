@@ -14,7 +14,7 @@ open System.IO
 
 let challenges = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "challenges")).GetFiles()
                  |> Seq.filter (fun f -> f.Extension = ".html")
-                 |> Seq.mapi (fun i c -> path (sprintf "/issue-%d" (i+1)) >>= file (sprintf "Challenges/%s" c.Name))
+                 |> Seq.mapi (fun i c -> path (sprintf "/issue-%d" (i+1)) >>= file c.FullName)
                  |> Seq.toList
 
 let config = 
@@ -27,8 +27,8 @@ let config =
 let app : WebPart =
   choose [
     GET >>= choose (challenges |> List.append [
-      path "/styles.css" >>= file "template/fsharp-style.css" ;
-      path "/" >>= file "index.html" 
+      path "/styles.css" >>= file (Path.Combine(__SOURCE_DIRECTORY__,"template/fsharp-style.css")) ;
+      path "/" >>= file (Path.Combine(__SOURCE_DIRECTORY__, "web/index.html"))
       ] )
   ]
 
