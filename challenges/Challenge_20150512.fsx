@@ -40,7 +40,9 @@ let input = (Seq.sort [
     "series", "The Wheel of Time, Book 11";
     "publisher", "Tor Fantasy";
     "published_date", "November 28, 2006";
-    "timestamp", (System.DateTime.Now - System.DateTime(0 |> int64)).TotalMilliseconds.ToString()
+    "timestamp", (System.DateTime.Now - System.DateTime(1970, 1, 1)).TotalMilliseconds 
+                 |> int64
+                 |> fun ms -> ms.ToString()
 ])
 let secret = "1234MySuperSecretKey4321"
 
@@ -56,16 +58,18 @@ let hash (x:System.Byte[]) = System.Security.Cryptography.SHA1.Create().ComputeH
 input
     |> Seq.map (fun (k, v) -> sprintf "%s=%s" k (encode v)) // Turn tuples into A=B strings
     |> String.concat "&" // Concatenate those strings using &
-    |> fun s -> sprintf "%s%s" s secret // Append secret
+    |> fun s -> 
+      let qs = s // Keep the query string for later
+      sprintf "%s%s" s secret // Append secret
     |> System.Text.Encoding.UTF8.GetBytes // Convert to byte array (UTF8)
     |> hash // And finally, compute the hash!
     |> Seq.map (fun x -> x.ToString("x2")) // Convert bytes to hex codes
     |> String.concat "" // Join them
+    |> sprintf "%s&signature=%s" qs
     |> printfn "%s" // Display them
 
 (** 
 ## Result
-```f#
-a3d3fe482447bb61c3f9739e921032ea4040d77b
-```
+
+`author_name=Robert%20Jordan&book_title=Knife%20of%20Dreams&published_date=November%2028%2c%202006&publisher=Tor%20Fantasy&series=The%20Wheel%20of%20Time%2c%20Book%2011&timestamp=1431458313749&signature=28f93f495513120a667707534718bba5a00f4fa9`
 *)
