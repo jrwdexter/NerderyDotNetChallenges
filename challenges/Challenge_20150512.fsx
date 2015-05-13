@@ -63,8 +63,7 @@ input
       sprintf "%s%s" s secret // Append secret
     |> System.Text.Encoding.UTF8.GetBytes // Convert to byte array (UTF8)
     |> hash // And finally, compute the hash!
-    |> Seq.map (fun x -> x.ToString("x2")) // Convert bytes to hex codes
-    |> String.concat "" // Join them
+    |> System.Convert.ToBase64String
     |> sprintf "%s&signature=%s" qs
     |> printfn "%s" // Display them
 
