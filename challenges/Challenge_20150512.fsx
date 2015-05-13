@@ -72,6 +72,9 @@ input
 
 (** 
 ## Result
-
 `author_name=Robert%20Jordan&book_title=Knife%20of%20Dreams&published_date=November%2028%2c%202006&publisher=Tor%20Fantasy&series=The%20Wheel%20of%20Time%2c%20Book%2011&timestamp=1431479981119&signature=U0HvVIcbE7sCI0MsQiwYSYqL970%3d`
+*)
+
+(**
+Mess with this code further on the [.NET Fiddle](https://dotnetfiddle.net/fZLJoW)
 *)

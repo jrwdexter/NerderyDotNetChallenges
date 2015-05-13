@@ -42,3 +42,7 @@ We'll take 100 elements, starting from the pair (0,1)
 573147844013817084101
 ```
 *)
+
+(**
+Mess with this code further on the [.NET Fiddle](https://dotnetfiddle.net/DimU2d)
+*)
