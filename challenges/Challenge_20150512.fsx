@@ -34,15 +34,14 @@ The function should return a query string that meets the following criteria:
 (**
 ### Step One: Let's setup inputs
 *)
-let input = (Seq.sort [
-    "author_name", "Robert Jordan";
-    "book_title", "Knife of Dreams";
-    "series", "The Wheel of Time, Book 11";
-    "publisher", "Tor Fantasy";
-    "published_date", "November 28, 2006";
-    "timestamp", (System.DateTime.Now - System.DateTime(1970, 1, 1)).TotalMilliseconds 
-                 |> int64
-                 |> fun ms -> ms.ToString()
+let input = (Seq.sort [ "author_name", "Robert Jordan";
+                        "book_title", "Knife of Dreams";
+                        "series", "The Wheel of Time, Book 11";
+                        "publisher", "Tor Fantasy";
+                        "published_date", "November 28, 2006";
+                        "timestamp", (System.DateTime.Now - System.DateTime(1970, 1, 1)).TotalMilliseconds 
+                         |> int64
+                         |> fun ms -> ms.ToString()
 ])
 let secret = "1234MySuperSecretKey4321"
 
@@ -50,22 +49,23 @@ let secret = "1234MySuperSecretKey4321"
 ### Step Two: Shorthand methods because legibility
 *)
 let encode (x:string) = System.Web.HttpUtility.UrlEncode(x).Replace("+", "%20")
-let hash (x:System.Byte[]) = System.Security.Cryptography.SHA1.Create().ComputeHash(x)
-
+let hash (x:string) = 
+    System.Text.Encoding.UTF8.GetBytes(x)                     // Get the bytes from the string
+    |> System.Security.Cryptography.SHA1.Create().ComputeHash // Compute the hash
+    |> System.Convert.ToBase64String                          // Convert it to a base 64 string
+    |> encode                                                 // Encode it for HTTP transfer
 (**
 ### Step Three: Do the thing
 *)
 input
     |> Seq.map (fun (k, v) -> sprintf "%s=%s" k (encode v)) // Turn tuples into A=B strings
-    |> String.concat "&" // Concatenate those strings using &
+    |> String.concat "&"                    // Concatenate those strings using &
     |> fun s -> 
-      let qs = s // Keep the query string for later
-      sprintf "%s%s" s secret // Append secret
-    |> System.Text.Encoding.UTF8.GetBytes // Convert to byte array (UTF8)
-    |> hash // And finally, compute the hash!
-    |> System.Convert.ToBase64String
-    |> sprintf "%s&signature=%s" qs
-    |> printfn "%s" // Display them
+      let qs = s                            // Keep the query string for later
+      sprintf "%s%s" s secret               // Append secret
+    |> hash                                 // Compute the hash
+    |> sprintf "%s&signature=%s" qs         // Assemble the string
+    |> printfn "%s"                         // Display it
 
 (** 
 ## Result
