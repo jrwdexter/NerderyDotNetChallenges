@@ -14,7 +14,7 @@ open System.IO
 
 let challenges = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "challenges")).GetFiles()
                  |> Seq.filter (fun f -> f.Extension = ".html")
-                 |> Seq.mapi (fun i c -> path (sprintf "/issue-%d" (i+1)) >>= file c.FullName)
+                 |> Seq.mapi (fun i c -> path (sprintf "/challenge-%d" (i+1)) >>= file c.FullName)
                  |> Seq.toList
 
 let config = 

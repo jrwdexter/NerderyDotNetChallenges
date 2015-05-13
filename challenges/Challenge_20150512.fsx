@@ -27,6 +27,9 @@ The function should return a query string that meets the following criteria:
      - Generate a hash from the string using the SHA-1 hash function. The resulting hash is the signature.
 *)
 
+(*** hide ***)
+open System
+
 (**
 ## Coding
 *)
@@ -39,7 +42,7 @@ let input = (Seq.sort [ "author_name", "Robert Jordan";
                         "series", "The Wheel of Time, Book 11";
                         "publisher", "Tor Fantasy";
                         "published_date", "November 28, 2006";
-                        "timestamp", (System.DateTime.Now - System.DateTime(1970, 1, 1)).TotalMilliseconds 
+                        "timestamp", (DateTime.Now - DateTime(1970, 1, 1)).TotalMilliseconds 
                          |> int64
                          |> fun ms -> ms.ToString()
 ])

@@ -26,7 +26,7 @@ let sequence = Seq.unfold (fun (x, y) ->
 
 (**
 ### Step Two: Print our output
-We'll take 100 elements, starting from the pair (1,1)
+We'll take 100 elements, starting from the pair (0,1)
 *)
 (decimal(0), decimal(1)) |> sequence |> Seq.take 100 |> Seq.iter (fun x -> printfn "%M" x) 
 
