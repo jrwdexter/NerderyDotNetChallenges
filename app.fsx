@@ -33,4 +33,4 @@ let app : WebPart =
   ]
 
 
-startWebServer defaultConfig app
+startWebServer config app
