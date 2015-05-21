@@ -38,9 +38,7 @@ The weird order of arguments here is for piping reasons: since F# supports [curr
 *)
 
 let getNextDay repeatInterval (endDate:DateTime) (dateTime:DateTime) =
-    match dateTime < endDate with
-    | true -> Some(dateTime, dateTime.AddDays(7.0 * repeatInterval))
-    | false -> None
+    if dateTime < endDate then Some(dateTime, dateTime.AddDays(7.0 * repeatInterval)) else None
 
 (**
 Next, we have the actual funciton.  What this does is maps the `daysOfWeek` argument onto the current week, to get days of the current week that we want repeated over the interval.
