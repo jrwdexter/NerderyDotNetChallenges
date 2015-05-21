@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>.NET Challenge for May 19, 2015
+</title>
+  <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link href="/styles.css" rel="stylesheet">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-23038189-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</head>
+<body>
+<a href="https://github.com/mandest/NerderyDotNetChallenges"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
+  <div class="container">
+    <div class="masthead">
+      <ul class="nav nav-pills pull-right">
+        <li><a href="https://dotnet.nerderylabs.com/">.NET Challenges</a></li>
+      </ul>
+      <h3><a href="/"><span class="muted">Nerdery .NET Challenges in </span>F#</a></h3>
+    </div>
+    <div class="row">
+      <div class="span9">
+        <div class="markdown-body">
+          <h1>.NET Challenge for May 19, 2015</h1>
+
+<h2>Prompt</h2>
+
+<p>The official format for submissions is <a href="https://dotnetfiddle.net"><a href="https://dotnetfiddle.net">https://dotnetfiddle.net</a></a>. Please post a link to your submission in a comment on this post.</p>
+
+<p>For this week’s challenge, create a function that will return a list of valid dates according to the rules below. The function should accept the following parameters:</p>
+
+<ul>
+<li><strong>repeatInterval</strong>: The frequency at which the event should repeat. This should be an integer representing the number of weeks before another event should be scheduled. This should be an integer.</li>
+<li><strong>daysOfWeek</strong>: An array of the days of the week on which an event should be scheduled. Week days should be represented by an integer between 0 and 6. Day 0 is Sunday. Day 6 is Saturday.</li>
+<li><strong>startDate</strong>: The date on which to start creating events. Complete all valid dates remaining in this date’s week after the start date. For example, if the start date were a Wednesday and the days of the week had a Tuesday and Thursday, the function would add Thursday and then jump ahead by the repeatInterval before scheduling Tuesday. If this value were a Thursday and the days of the week had only a Tuesday, the first scheduled date would be after the repeatInterval.</li>
+<li><strong>endDate</strong>: The date on which to stop creating events.</li>
+</ul>
+
+<p>Feel free to select different parameter names that are either more idiomatically correct for the platform or more aesthetically pleasing to you.</p>
+
+<p>For an example of the kind of UI this would be intended to support, check out the “Repeat” dialog in the Google’s Calendar application when creating an event.</p>
+
+<h3>Step One: Let's setup inputs</h3>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">startDate</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="t">DateTime</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">Now</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">endDate</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="t">DateTime</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="i">Now</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="f">AddDays</span>(<span class="n">60.0</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="i">repeatInterval</span> <span class="o">=</span> <span class="n">2.0</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="i">daysOfWeek</span> <span class="o">=</span> [<span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="t">DayOfWeek</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="i">Sunday</span>; <span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="t">DayOfWeek</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="i">Friday</span>]
+</pre>
+</td>
+</tr>
+</table>
+
+<h3>Step Two: The actual methods</h3>
+
+<p>Our first helper method simply returns a tuple of the current day and the next day (skipped by interval) if the input <code>dateTime</code> is less than the <code>endDate</code>. 
+If it's greater than the end date, a <code>None</code> <a href="https://msdn.microsoft.com/en-us/library/dd233245.aspx">option type</a> is returned.</p>
+
+<p>The weird order of arguments here is for piping reasons: since F# supports <a href="http://fsharpforfunandprofit.com/posts/currying/">curring</a>, the <em>last argument</em> is the one we want to be piping in via a <code>|&gt;</code> operator.</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="f">getNextDay</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="i">repeatInterval</span> (<span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="i">endDate</span><span class="o">:</span><span onmouseout="hideTip(event, 'fs3', 18)" onmouseover="showTip(event, 'fs3', 18)" class="t">DateTime</span>) (<span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="i">dateTime</span><span class="o">:</span><span onmouseout="hideTip(event, 'fs3', 20)" onmouseover="showTip(event, 'fs3', 20)" class="t">DateTime</span>) <span class="o">=</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="i">dateTime</span> <span class="o">&lt;</span> <span onmouseout="hideTip(event, 'fs14', 22)" onmouseover="showTip(event, 'fs14', 22)" class="i">endDate</span> <span class="k">with</span>
+    | <span class="k">true</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="p">Some</span>(<span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="i">dateTime</span>, <span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="i">dateTime</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 26)" onmouseover="showTip(event, 'fs6', 26)" class="f">AddDays</span>(<span class="n">7.0</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs13', 27)" onmouseover="showTip(event, 'fs13', 27)" class="i">repeatInterval</span>))
+    | <span class="k">false</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs17', 28)" onmouseover="showTip(event, 'fs17', 28)" class="p">None</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<p>Next, we have the actual funciton.  What this does is maps the <code>daysOfWeek</code> argument onto the current week, to get days of the current week that we want repeated over the interval.</p>
+
+<p>After this, we <code>collect</code> (think <code>.SelectMany()</code> in C#) a set of <a href="http://geekswithblogs.net/MarkPearl/archive/2010/06/23/f-seq.unfold.aspx">unfold</a>.</p>
+
+<p>Unfold is exactly like C#'s <code>.Aggregate()</code> method, <em>except</em> that it returns <strong>each</strong> value it aggregates over - it returns an enumerable.  So by selecting many, we're flattening the set of all intervally-repeated days present.</p>
+
+<p>Finally, we filter (to make sure we don't have any trailing or previous-of-this-week entries) and sort (just because).</p>
+
+<p>Therefore, our process looks like:</p>
+
+<ul>
+<li>Map <code>daysOfWeek</code> to this week's <code>DateTime</code> objects</li>
+<li>Repeat each of those days over <code>endDate</code> - <code>startDate</code></li>
+<li>Filter for trailing &amp; preceeding days</li>
+<li>Sort</li>
+</ul>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="f">getDaysOfWeek</span> <span onmouseout="hideTip(event, 'fs13', 30)" onmouseover="showTip(event, 'fs13', 30)" class="i">repeatInterval</span> <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="i">daysOfWeek</span> <span onmouseout="hideTip(event, 'fs14', 32)" onmouseover="showTip(event, 'fs14', 32)" class="i">endDate</span> (<span onmouseout="hideTip(event, 'fs20', 33)" onmouseover="showTip(event, 'fs20', 33)" class="i">startDate</span><span class="o">:</span><span onmouseout="hideTip(event, 'fs3', 34)" onmouseover="showTip(event, 'fs3', 34)" class="t">DateTime</span>) <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs19', 35)" onmouseover="showTip(event, 'fs19', 35)" class="i">daysOfWeek</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 36)" onmouseover="showTip(event, 'fs21', 36)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 37)" onmouseover="showTip(event, 'fs22', 37)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs23', 38)" onmouseover="showTip(event, 'fs23', 38)" class="i">wd</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs20', 39)" onmouseover="showTip(event, 'fs20', 39)" class="i">startDate</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 40)" onmouseover="showTip(event, 'fs6', 40)" class="f">AddDays</span>(<span class="o">-</span><span class="n">1.0</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs24', 41)" onmouseover="showTip(event, 'fs24', 41)" class="f">float</span> <span onmouseout="hideTip(event, 'fs20', 42)" onmouseover="showTip(event, 'fs20', 42)" class="i">startDate</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 43)" onmouseover="showTip(event, 'fs25', 43)" class="i">DayOfWeek</span>)<span class="o">.</span><span class="f">AddDays</span>(<span onmouseout="hideTip(event, 'fs24', 44)" onmouseover="showTip(event, 'fs24', 44)" class="f">float</span> <span onmouseout="hideTip(event, 'fs23', 45)" onmouseover="showTip(event, 'fs23', 45)" class="i">wd</span>))
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 46)" onmouseover="showTip(event, 'fs21', 46)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 47)" onmouseover="showTip(event, 'fs26', 47)" class="f">collect</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs27', 48)" onmouseover="showTip(event, 'fs27', 48)" class="i">dt</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs27', 49)" onmouseover="showTip(event, 'fs27', 49)" class="i">dt</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 50)" onmouseover="showTip(event, 'fs21', 50)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 51)" onmouseover="showTip(event, 'fs28', 51)" class="f">unfold</span> (<span onmouseout="hideTip(event, 'fs12', 52)" onmouseover="showTip(event, 'fs12', 52)" class="f">getNextDay</span> <span onmouseout="hideTip(event, 'fs13', 53)" onmouseover="showTip(event, 'fs13', 53)" class="i">repeatInterval</span> <span onmouseout="hideTip(event, 'fs14', 54)" onmouseover="showTip(event, 'fs14', 54)" class="i">endDate</span>))
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 55)" onmouseover="showTip(event, 'fs21', 55)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 56)" onmouseover="showTip(event, 'fs29', 56)" class="f">filter</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs27', 57)" onmouseover="showTip(event, 'fs27', 57)" class="i">dt</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs27', 58)" onmouseover="showTip(event, 'fs27', 58)" class="i">dt</span> <span class="o">&gt;</span> <span onmouseout="hideTip(event, 'fs20', 59)" onmouseover="showTip(event, 'fs20', 59)" class="i">startDate</span> <span class="o">&amp;&amp;</span> <span onmouseout="hideTip(event, 'fs27', 60)" onmouseover="showTip(event, 'fs27', 60)" class="i">dt</span> <span class="o">&lt;</span> <span onmouseout="hideTip(event, 'fs14', 61)" onmouseover="showTip(event, 'fs14', 61)" class="i">endDate</span>)
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 62)" onmouseover="showTip(event, 'fs21', 62)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 63)" onmouseover="showTip(event, 'fs30', 63)" class="f">sort</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<h3>Step Three: Do the thing</h3>
+
+<p>Simple call to the method and iteration to display it.  We'll add some fancy display logic to make it a little more legible.</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 64)" onmouseover="showTip(event, 'fs31', 64)" class="f">dateDisplay</span> (<span onmouseout="hideTip(event, 'fs27', 65)" onmouseover="showTip(event, 'fs27', 65)" class="i">dt</span><span class="o">:</span><span onmouseout="hideTip(event, 'fs3', 66)" onmouseover="showTip(event, 'fs3', 66)" class="t">DateTime</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 67)" onmouseover="showTip(event, 'fs32', 67)" class="f">sprintf</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s"> - </span><span class="pf">%s</span><span class="s">&quot;</span> (<span onmouseout="hideTip(event, 'fs27', 68)" onmouseover="showTip(event, 'fs27', 68)" class="i">dt</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 69)" onmouseover="showTip(event, 'fs25', 69)" class="i">DayOfWeek</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs33', 70)" onmouseover="showTip(event, 'fs33', 70)" class="f">ToString</span>()) (<span onmouseout="hideTip(event, 'fs27', 71)" onmouseover="showTip(event, 'fs27', 71)" class="i">dt</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 72)" onmouseover="showTip(event, 'fs34', 72)" class="f">ToString</span>())
+<span onmouseout="hideTip(event, 'fs31', 73)" onmouseover="showTip(event, 'fs31', 73)" class="f">dateDisplay</span> <span onmouseout="hideTip(event, 'fs2', 74)" onmouseover="showTip(event, 'fs2', 74)" class="i">startDate</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs35', 75)" onmouseover="showTip(event, 'fs35', 75)" class="f">printfn</span> <span class="s">&quot;Start date - </span><span class="pf">%s</span><span class="s"></span><span class="e">\n</span><span class="s">-----------------------------&quot;</span>
+
+<span onmouseout="hideTip(event, 'fs18', 76)" onmouseover="showTip(event, 'fs18', 76)" class="f">getDaysOfWeek</span> <span onmouseout="hideTip(event, 'fs7', 77)" onmouseover="showTip(event, 'fs7', 77)" class="i">repeatInterval</span> <span onmouseout="hideTip(event, 'fs8', 78)" onmouseover="showTip(event, 'fs8', 78)" class="i">daysOfWeek</span> <span onmouseout="hideTip(event, 'fs5', 79)" onmouseover="showTip(event, 'fs5', 79)" class="i">endDate</span> <span onmouseout="hideTip(event, 'fs2', 80)" onmouseover="showTip(event, 'fs2', 80)" class="i">startDate</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 81)" onmouseover="showTip(event, 'fs21', 81)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 82)" onmouseover="showTip(event, 'fs36', 82)" class="f">iter</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs37', 83)" onmouseover="showTip(event, 'fs37', 83)" class="i">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs31', 84)" onmouseover="showTip(event, 'fs31', 84)" class="f">dateDisplay</span> <span onmouseout="hideTip(event, 'fs37', 85)" onmouseover="showTip(event, 'fs37', 85)" class="i">x</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs35', 86)" onmouseover="showTip(event, 'fs35', 86)" class="f">printfn</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">&quot;</span>)
+
+<span onmouseout="hideTip(event, 'fs31', 87)" onmouseover="showTip(event, 'fs31', 87)" class="f">dateDisplay</span> <span onmouseout="hideTip(event, 'fs5', 88)" onmouseover="showTip(event, 'fs5', 88)" class="i">endDate</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs35', 89)" onmouseover="showTip(event, 'fs35', 89)" class="f">printfn</span> <span class="s">&quot;-----------------------------</span><span class="e">\n</span><span class="s">End date - </span><span class="pf">%s</span><span class="s">&quot;</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<h2>Result</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="i">Start</span> <span class="i">date</span> <span class="o">-</span> <span class="i">Wednesday</span> <span class="o">-</span> <span class="n">5</span><span class="o">/</span><span class="n">20</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+<span class="o">-----------------------------</span>
+<span class="i">Friday</span> <span class="o">-</span> <span class="n">5</span><span class="o">/</span><span class="n">22</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+<span class="i">Sunday</span> <span class="o">-</span> <span class="n">5</span><span class="o">/</span><span class="n">31</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+<span class="i">Friday</span> <span class="o">-</span> <span class="n">6</span><span class="o">/</span><span class="n">5</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+<span class="i">Sunday</span> <span class="o">-</span> <span class="n">6</span><span class="o">/</span><span class="n">14</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+<span class="i">Friday</span> <span class="o">-</span> <span class="n">6</span><span class="o">/</span><span class="n">19</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+<span class="i">Sunday</span> <span class="o">-</span> <span class="n">6</span><span class="o">/</span><span class="n">28</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+<span class="i">Friday</span> <span class="o">-</span> <span class="n">7</span><span class="o">/</span><span class="n">3</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+<span class="i">Sunday</span> <span class="o">-</span> <span class="n">7</span><span class="o">/</span><span class="n">12</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+<span class="i">Friday</span> <span class="o">-</span> <span class="n">7</span><span class="o">/</span><span class="n">17</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+<span class="o">-----------------------------</span>
+<span class="i">End</span> <span class="i">date</span> <span class="o">-</span> <span class="i">Sunday</span> <span class="o">-</span> <span class="n">7</span><span class="o">/</span><span class="n">19</span><span class="o">/</span><span class="n">2015</span> <span class="n">6</span><span class="o">:</span><span class="n">55</span><span class="o">:</span><span class="n">56</span> <span class="i">PM</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<p>Mess with this code further on the <a href="https://dotnetfiddle.net/QCDkY6">.NET Fiddle</a></p>
+
+        </div>
+      </div>
+      <div class="span3">
+        <ul id="menu" class="nav nav-list">
+          <li class="nav-header">Challenges</li>
+          <li><a href="/">Home</a></li>
+          <li class="divider"></li>
+          <li><a href="/challenge-1">Challenge 1 - Fibonacci</a></li>
+          <li><a href="/challenge-2">Challenge 2 - Hashing</a></li>
+          <li><a href="/challenge-3">Challenge 3 - Repeating Events</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
