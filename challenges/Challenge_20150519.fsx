@@ -60,7 +60,7 @@ Therefore, our process looks like:
 *)
 let getDaysOfWeek repeatInterval daysOfWeek endDate (startDate:DateTime) =
     daysOfWeek |> Seq.map (fun wd -> startDate.AddDays(-1.0 * float startDate.DayOfWeek).AddDays(float wd))
-    |> Seq.collect (fun dt -> dt |> Seq.unfold (getNextDay repeatInterval endDate))
+    |> Seq.collect (Seq.unfold (getNextDay repeatInterval endDate))
     |> Seq.filter (fun dt -> dt > startDate && dt < endDate)
     |> Seq.sort
 
