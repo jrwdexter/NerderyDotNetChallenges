@@ -11,12 +11,15 @@ open Suave.Web
 open System
 open System.Net
 open System.IO
+open System.Text.RegularExpressions
 
+let findChallengeNumber = Regex("""^.*_(?<ChallengeNumber>\d*)\.html""", RegexOptions.Compiled)
+let challengeNumber name = findChallengeNumber.Replace(name, "${ChallengeNumber}")
 let challenges = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "challenges")).GetFiles()
                  |> Seq.filter (fun f -> f.Extension = ".html")
                  |> Seq.mapi (fun i c -> 
-                  [path (sprintf "/challenge-%d" (i+1)) >>= file c.FullName;
-                   path (sprintf "/issue-%d" (i+1)) >>= file c.FullName] )
+                  [path (sprintf "/challenge-%s" (c.FullName |> challengeNumber)) >>= file c.FullName;
+                   path (sprintf "/issue-%s" (c.FullName |> challengeNumber)) >>= file c.FullName] )
                  |> Seq.collect (fun x -> x)
                  |> Seq.toList
 

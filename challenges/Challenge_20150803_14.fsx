@@ -5,9 +5,10 @@
 
 (**
 We'll use 3 parts of FSLab:
-  1. FSharp.Data for data querying
-  2. Deedle for data processing and manipulation
-  3. XPlot for graphing our results
+
+  1. [FSharp.Data](http://fsharp.github.io/FSharp.Data/) for data querying
+  2. [Deedle](http://bluemountaincapital.github.io/Deedle/) for data processing and manipulation
+  3. [XPlot](http://tahahachana.github.io/XPlot/) for graphing our results
 *)
 
 open System
@@ -125,6 +126,7 @@ let partyFinancesStdDev = parties |> Frame.applyLevel fst Stats.stdDev
 # Charting!
 
 Chart some interesting things.
+
   - How many candidates did each party have in 2012?  
   - Which party had the most capital?
   - Which party had the most capital PER candidate?
