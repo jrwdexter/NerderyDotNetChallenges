@@ -5,9 +5,9 @@
 
 (**
 We'll use 3 parts of FSLab:
-1. FSharp.Data for data querying
-2. Deedle for data processing and manipulation
-3. XPlot for graphing our results
+  1. FSharp.Data for data querying
+  2. Deedle for data processing and manipulation
+  3. XPlot for graphing our results
 *)
 
 open System
@@ -20,7 +20,7 @@ open XPlot.GoogleCharts
 Set some constants up.
 *)
 
-let baseUrl = "http://api.nytimes.com/svc/elections/us/v3/finances"
+let baseUrl = "http://api.nytimes.com/svc/elections/us/v3/finances/2012"
 // let apiKey = "3938ef998ede56fd9ba55e3b2ccefa37:16:72625105"
 let apiKey = "316ed00bf4b54d8ba9a625e84f78d80a:12:72637909"
 
@@ -38,59 +38,12 @@ Type providers are super-classes that allow types to be generated (and compiled 
 We'll setup 2 schemas (types) to query against: **broad** candidate information, and **detailed** candidate information.
 Doing this gives strongly typed intellisense-capable classes which can load information directly from the API.
 *)
-type candidateCollection = JsonProvider<"""{
-  "status": "OK",
-  "copyright": "Copyright (c) 2015 The New York Times Company. All Rights Reserved.",
-  "cycle": 2016,
-  "base_uri": "http://api.nytimes.com/svc/elections/us/v3/finances/2016/",
-  "num_results": 10,
-  "results": [{
-    "candidate": {
-      "id": "H6MN01174",
-      "relative_uri": "/candidates/H6MN01174.json",
-      "name": "WALZ, TIMOTHY J.",
-      "party": "DEM"
-    },
-    "committee": "/committees/C00409409.json",
-    "state": "/seats/MN.json",
-    "district": "/seats/MN/house/01.json"
-  }]
-}""">
-type candidateDetailsCollection = JsonProvider<"""{
-  "status": "OK",
-  "copyright": "Copyright (c) 2015 The New York Times Company. All Rights Reserved.",
-  "base_uri": "http://api.nytimes.com/svc/elections/us/v3/finances/2012/",
-  "cycle": 2012,
-  "results": [{
-    "id": "S6MN00234",
-    "name": "DAVIS, TIM",
-    "party": "OTH",
-    "district": "/seats/MN/senate.json",
-    "fec_uri": "http://docquery.fec.gov/cgi-bin/fecimg/?S6MN00234",
-    "committee": null,
-    "state": "/seats/MN.json",
-    "mailing_address": "4154 VINCENT AVENUE NORTH",
-    "mailing_city": "MINNEAPOLIS",
-    "mailing_state": "MN",
-    "mailing_zip": "55412",
-    "status": null,
-    "total_receipts": 0,
-    "total_from_individuals": 0,
-    "total_from_pacs": 0,
-    "total_contributions": 0,
-    "candidate_loans": 0,
-    "total_disbursements": 0,
-    "begin_cash": 0,
-    "end_cash": 0,
-    "total_refunds": 0,
-    "debts_owed": 0,
-    "date_coverage_from": null,
-    "date_coverage_to": null,
-    "independent_expenditures": 0,
-    "coordinated_expenditures": 0,
-    "other_cycles": []
-  }]
-}""">
+let [<Literal>] candidateUrl = "http://api.nytimes.com/svc/elections/us/v3/finances/\
+2012/seats/MN.json?api-key=316ed00bf4b54d8ba9a625e84f78d80a:12:72637909"
+let [<Literal>] detailsUrl = "http://api.nytimes.com/svc/elections/us/v3/finances/\
+2012/candidates/H2MN07097.json?api-key=316ed00bf4b54d8ba9a625e84f78d80a:12:72637909"
+type candidateCollection = JsonProvider<candidateUrl>
+type candidateDetailsCollection = JsonProvider<detailsUrl>
 
 (**
 # Data querying
@@ -99,7 +52,7 @@ Next, let's find all candidates in all states.
 *)
 let stateCandidates =
     states
-    |> Seq.map (fun s -> sprintf "%s/2012/seats/%s.json?api-key=%s" baseUrl s apiKey)
+    |> Seq.map (fun s -> sprintf "%s/seats/%s.json?api-key=%s" baseUrl s apiKey)
     |> Seq.map candidateCollection.Load
     |> Seq.toList
 
@@ -107,44 +60,32 @@ let stateCandidates =
 Then get details for everyone one of these candidates.
 *)
 let candidateDetails =
-    stateCandidates |> Seq.collect (fun c ->
-      c.Results |> Seq.map(fun r -> r.Candidate.Id))
+    stateCandidates
+    |> Seq.collect (fun c -> c.Results |> Seq.map(fun r -> r.Candidate.Id))
     |> Seq.map (fun s ->
-      sprintf "%s/2012/candidates/%s.json?api-key=%s" baseUrl s apiKey)
+      sprintf "%s/candidates/%s.json?api-key=%s" baseUrl s apiKey)
     |> Seq.map candidateDetailsCollection.Load
     |> Seq.toList
 
 (**
-Deedle doesn't support expanding JsonValue types by default, so we'll add that into the library.  This is mostly unecessary to read.
+Deedle doesn't support expanding JsonValue types by default, so we'll add that into the library.  This is somewhat superfluous, as it's configuring Deedle.  Feel free to peruse if interested.  An issue was opened [here](https://github.com/fslaborg/FsLab/issues/14) for those with interest.
 *)
-let matchColumn (key:string) value =
+let rec expander key value =
     seq {
         match value with
-        | JsonValue.String (s)  -> yield key,typeof<string>,box s
+        | JsonValue.String  (s) -> yield key,typeof<string>,box s
         | JsonValue.Boolean (b) -> yield key,typeof<bool>,box b
-        | JsonValue.Float (f)   -> yield key,typeof<float>,box f
-        | JsonValue.Null (_)    -> yield key,typeof<obj>,box null
-        | JsonValue.Number (n)  -> yield key,typeof<decimal>,box n
-        | JsonValue.Record (r)  -> yield key,typeof<JsonValue>,box r
-        | JsonValue.Array (a)   ->
+        | JsonValue.Float   (f) -> yield key,typeof<float>,box f
+        | JsonValue.Null    (_) -> yield key,typeof<obj>,box ()
+        | JsonValue.Number  (n) -> yield key,typeof<decimal>,box n
+        | JsonValue.Record  (r) -> yield! r |> Seq.collect ((<||)expander)
+        | JsonValue.Array   (a) ->
             yield! a
-            |> Seq.map (fun item -> (key,typeof<JsonValue>,box item))
+            |> Seq.collect (expander "arrayItem")
     }
 
-
-Frame.CustomExpanders.Add(typeof<JsonDocument>, fun o -> seq {
-    let doc = o :?> FSharp.Data.Runtime.BaseTypes.JsonDocument
-    match doc.JsonValue with 
-    | JsonValue.Record(map) ->
-        for (k,v) in map do yield! (matchColumn k v)
-    | _ -> () })
-
-Frame.CustomExpanders.Add(typeof<JsonValue>, fun o -> seq {
-    let doc = o :?> JsonValue
-    match doc with 
-    | JsonValue.Record(map) ->
-        for (k,v) in map do yield! (matchColumn k v)
-    | _ -> () })
+Frame.CustomExpanders.Add(typeof<JsonDocument>, fun o -> (o :?> JsonDocument).JsonValue |> expander "root")
+Frame.CustomExpanders.Add(typeof<JsonValue>, fun o ->  o :?> JsonValue |> expander "root")
 
 (**
 # Deedle for analysis
@@ -184,9 +125,9 @@ let partyFinancesStdDev = parties |> Frame.applyLevel fst Stats.stdDev
 # Charting!
 
 Chart some interesting things.
- - How many candidates did each party have in 2012?  
- - Which party had the most capital?
- - Which party had the most capital PER candidate?
+  - How many candidates did each party have in 2012?  
+  - Which party had the most capital?
+  - Which party had the most capital PER candidate?
 *)
 numberOfCandidates
 |> Chart.Pie
@@ -210,9 +151,9 @@ Cool property of data frames: division and other mathematical operatoins are don
 (partyFinancesSum?``Candidate.total_contributions``) /(numberOfCandidates |> Series.mapValues float) 
 |> Chart.Pie 
 |> Chart.WithLegend true 
-|> Chart.WithTitle "Contributions per candidate"
+|> Chart.WithTitle "Average contributions per candidate"
 
 (**
 <iframe src="/chart-3" scrolling="no" seamless="seamless"></iframe>
-And it looks like although the republican party had more candidates, democrats raised more money.  Additionally, the WFP party (which was so small as to not even register on our first exposure) raisd a fair amount of money for their one candidate.
+And it looks like although the republican party had more candidates, democrats raised more money.  Additionally, the WFP party (which was so small as to not even register on our first exposure) raisd a fair amount of money for their **one** candidate.
 *)

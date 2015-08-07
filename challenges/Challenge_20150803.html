@@ -43,9 +43,9 @@
 </table>
 
 <p>We'll use 3 parts of FSLab:
-1. FSharp.Data for data querying
-2. Deedle for data processing and manipulation
-3. XPlot for graphing our results</p>
+  1. FSharp.Data for data querying
+  2. Deedle for data processing and manipulation
+  3. XPlot for graphing our results</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
@@ -81,7 +81,7 @@
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="i">baseUrl</span> <span class="o">=</span> <span class="s">&quot;http://api.nytimes.com/svc/elections/us/v3/finances&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="i">baseUrl</span> <span class="o">=</span> <span class="s">&quot;http://api.nytimes.com/svc/elections/us/v3/finances/2012&quot;</span>
 <span class="c">// let apiKey = &quot;3938ef998ede56fd9ba55e3b2ccefa37:16:72625105&quot;</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="i">apiKey</span> <span class="o">=</span> <span class="s">&quot;316ed00bf4b54d8ba9a625e84f78d80a:12:72637909&quot;</span>
 
@@ -103,115 +103,21 @@
 Doing this gives strongly typed intellisense-capable classes which can load information directly from the API.</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
-<span class="l">14: </span>
-<span class="l">15: </span>
-<span class="l">16: </span>
-<span class="l">17: </span>
-<span class="l">18: </span>
-<span class="l">19: </span>
-<span class="l">20: </span>
-<span class="l">21: </span>
-<span class="l">22: </span>
-<span class="l">23: </span>
-<span class="l">24: </span>
-<span class="l">25: </span>
-<span class="l">26: </span>
-<span class="l">27: </span>
-<span class="l">28: </span>
-<span class="l">29: </span>
-<span class="l">30: </span>
-<span class="l">31: </span>
-<span class="l">32: </span>
-<span class="l">33: </span>
-<span class="l">34: </span>
-<span class="l">35: </span>
-<span class="l">36: </span>
-<span class="l">37: </span>
-<span class="l">38: </span>
-<span class="l">39: </span>
-<span class="l">40: </span>
-<span class="l">41: </span>
-<span class="l">42: </span>
-<span class="l">43: </span>
-<span class="l">44: </span>
-<span class="l">45: </span>
-<span class="l">46: </span>
-<span class="l">47: </span>
-<span class="l">48: </span>
-<span class="l">49: </span>
-<span class="l">50: </span>
-<span class="l">51: </span>
-<span class="l">52: </span>
-<span class="l">53: </span>
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">type</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="t">candidateCollection</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="t">JsonProvider</span><span class="o">&lt;</span><span class="s">&quot;&quot;&quot;{</span>
-<span class="s">  &quot;status&quot;: &quot;OK&quot;,</span>
-<span class="s">  &quot;copyright&quot;: &quot;Copyright (c) 2015 The New York Times Company. All Rights Reserved.&quot;,</span>
-<span class="s">  &quot;cycle&quot;: 2016,</span>
-<span class="s">  &quot;base_uri&quot;: &quot;http://api.nytimes.com/svc/elections/us/v3/finances/2016/&quot;,</span>
-<span class="s">  &quot;num_results&quot;: 10,</span>
-<span class="s">  &quot;results&quot;: [{</span>
-<span class="s">    &quot;candidate&quot;: {</span>
-<span class="s">      &quot;id&quot;: &quot;H6MN01174&quot;,</span>
-<span class="s">      &quot;relative_uri&quot;: &quot;/candidates/H6MN01174.json&quot;,</span>
-<span class="s">      &quot;name&quot;: &quot;WALZ, TIMOTHY J.&quot;,</span>
-<span class="s">      &quot;party&quot;: &quot;DEM&quot;</span>
-<span class="s">    },</span>
-<span class="s">    &quot;committee&quot;: &quot;/committees/C00409409.json&quot;,</span>
-<span class="s">    &quot;state&quot;: &quot;/seats/MN.json&quot;,</span>
-<span class="s">    &quot;district&quot;: &quot;/seats/MN/house/01.json&quot;</span>
-<span class="s">  }]</span>
-<span class="s">}&quot;&quot;&quot;</span><span class="o">&gt;</span>
-<span class="k">type</span> <span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="t">candidateDetailsCollection</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="t">JsonProvider</span><span class="o">&lt;</span><span class="s">&quot;&quot;&quot;{</span>
-<span class="s">  &quot;status&quot;: &quot;OK&quot;,</span>
-<span class="s">  &quot;copyright&quot;: &quot;Copyright (c) 2015 The New York Times Company. All Rights Reserved.&quot;,</span>
-<span class="s">  &quot;base_uri&quot;: &quot;http://api.nytimes.com/svc/elections/us/v3/finances/2012/&quot;,</span>
-<span class="s">  &quot;cycle&quot;: 2012,</span>
-<span class="s">  &quot;results&quot;: [{</span>
-<span class="s">    &quot;id&quot;: &quot;S6MN00234&quot;,</span>
-<span class="s">    &quot;name&quot;: &quot;DAVIS, TIM&quot;,</span>
-<span class="s">    &quot;party&quot;: &quot;OTH&quot;,</span>
-<span class="s">    &quot;district&quot;: &quot;/seats/MN/senate.json&quot;,</span>
-<span class="s">    &quot;fec_uri&quot;: &quot;http://docquery.fec.gov/cgi-bin/fecimg/?S6MN00234&quot;,</span>
-<span class="s">    &quot;committee&quot;: null,</span>
-<span class="s">    &quot;state&quot;: &quot;/seats/MN.json&quot;,</span>
-<span class="s">    &quot;mailing_address&quot;: &quot;4154 VINCENT AVENUE NORTH&quot;,</span>
-<span class="s">    &quot;mailing_city&quot;: &quot;MINNEAPOLIS&quot;,</span>
-<span class="s">    &quot;mailing_state&quot;: &quot;MN&quot;,</span>
-<span class="s">    &quot;mailing_zip&quot;: &quot;55412&quot;,</span>
-<span class="s">    &quot;status&quot;: null,</span>
-<span class="s">    &quot;total_receipts&quot;: 0,</span>
-<span class="s">    &quot;total_from_individuals&quot;: 0,</span>
-<span class="s">    &quot;total_from_pacs&quot;: 0,</span>
-<span class="s">    &quot;total_contributions&quot;: 0,</span>
-<span class="s">    &quot;candidate_loans&quot;: 0,</span>
-<span class="s">    &quot;total_disbursements&quot;: 0,</span>
-<span class="s">    &quot;begin_cash&quot;: 0,</span>
-<span class="s">    &quot;end_cash&quot;: 0,</span>
-<span class="s">    &quot;total_refunds&quot;: 0,</span>
-<span class="s">    &quot;debts_owed&quot;: 0,</span>
-<span class="s">    &quot;date_coverage_from&quot;: null,</span>
-<span class="s">    &quot;date_coverage_to&quot;: null,</span>
-<span class="s">    &quot;independent_expenditures&quot;: 0,</span>
-<span class="s">    &quot;coordinated_expenditures&quot;: 0,</span>
-<span class="s">    &quot;other_cycles&quot;: []</span>
-<span class="s">  }]</span>
-<span class="s">}&quot;&quot;&quot;</span><span class="o">&gt;</span>
+<span class="k">let</span> [&lt;<span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="t">Literal</span>&gt;] <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="i">candidateUrl</span> <span class="o">=</span> <span class="s">&quot;http://api.nytimes.com/svc/elections/us/v3/finances/\</span>
+<span class="s">2012/seats/MN.json?api-key=316ed00bf4b54d8ba9a625e84f78d80a:12:72637909&quot;</span>
+<span class="k">let</span> [&lt;<span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="t">Literal</span>&gt;] <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="i">detailsUrl</span> <span class="o">=</span> <span class="s">&quot;http://api.nytimes.com/svc/elections/us/v3/finances/\</span>
+<span class="s">2012/candidates/H2MN07097.json?api-key=316ed00bf4b54d8ba9a625e84f78d80a:12:72637909&quot;</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="t">candidateCollection</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 19)" onmouseover="showTip(event, 'fs16', 19)" class="t">JsonProvider</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="i">candidateUrl</span><span class="o">&gt;</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs17', 21)" onmouseover="showTip(event, 'fs17', 21)" class="t">candidateDetailsCollection</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="t">JsonProvider</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="i">detailsUrl</span><span class="o">&gt;</span>
 </pre>
 </td>
 </tr>
@@ -230,11 +136,11 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="i">stateCandidates</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="i">states</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 21)" onmouseover="showTip(event, 'fs17', 21)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs18', 22)" onmouseover="showTip(event, 'fs18', 22)" class="i">s</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs19', 23)" onmouseover="showTip(event, 'fs19', 23)" class="f">sprintf</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">/2012/seats/</span><span class="pf">%s</span><span class="s">.json?api-key=</span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs9', 24)" onmouseover="showTip(event, 'fs9', 24)" class="i">baseUrl</span> <span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="i">s</span> <span onmouseout="hideTip(event, 'fs10', 26)" onmouseover="showTip(event, 'fs10', 26)" class="i">apiKey</span>)
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 27)" onmouseover="showTip(event, 'fs16', 27)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 28)" onmouseover="showTip(event, 'fs17', 28)" class="f">map</span> <span onmouseout="hideTip(event, 'fs12', 29)" onmouseover="showTip(event, 'fs12', 29)" class="t">candidateCollection</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 30)" onmouseover="showTip(event, 'fs20', 30)" class="f">Load</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 31)" onmouseover="showTip(event, 'fs16', 31)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 32)" onmouseover="showTip(event, 'fs21', 32)" class="f">toList</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 24)" onmouseover="showTip(event, 'fs18', 24)" class="i">stateCandidates</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs11', 25)" onmouseover="showTip(event, 'fs11', 25)" class="i">states</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 26)" onmouseover="showTip(event, 'fs19', 26)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 27)" onmouseover="showTip(event, 'fs20', 27)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs21', 28)" onmouseover="showTip(event, 'fs21', 28)" class="i">s</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs22', 29)" onmouseover="showTip(event, 'fs22', 29)" class="f">sprintf</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">/seats/</span><span class="pf">%s</span><span class="s">.json?api-key=</span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs9', 30)" onmouseover="showTip(event, 'fs9', 30)" class="i">baseUrl</span> <span onmouseout="hideTip(event, 'fs21', 31)" onmouseover="showTip(event, 'fs21', 31)" class="i">s</span> <span onmouseout="hideTip(event, 'fs10', 32)" onmouseover="showTip(event, 'fs10', 32)" class="i">apiKey</span>)
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 33)" onmouseover="showTip(event, 'fs19', 33)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 34)" onmouseover="showTip(event, 'fs20', 34)" class="f">map</span> <span onmouseout="hideTip(event, 'fs15', 35)" onmouseover="showTip(event, 'fs15', 35)" class="t">candidateCollection</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 36)" onmouseover="showTip(event, 'fs23', 36)" class="f">Load</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 37)" onmouseover="showTip(event, 'fs19', 37)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 38)" onmouseover="showTip(event, 'fs24', 38)" class="f">toList</span>
 </pre>
 </td>
 </tr>
@@ -253,19 +159,19 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 33)" onmouseover="showTip(event, 'fs22', 33)" class="i">candidateDetails</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs15', 34)" onmouseover="showTip(event, 'fs15', 34)" class="i">stateCandidates</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 35)" onmouseover="showTip(event, 'fs16', 35)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 36)" onmouseover="showTip(event, 'fs23', 36)" class="f">collect</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 37)" onmouseover="showTip(event, 'fs24', 37)" class="i">c</span> <span class="k">-&gt;</span>
-      <span onmouseout="hideTip(event, 'fs24', 38)" onmouseover="showTip(event, 'fs24', 38)" class="i">c</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 39)" onmouseover="showTip(event, 'fs25', 39)" class="i">Results</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 40)" onmouseover="showTip(event, 'fs16', 40)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 41)" onmouseover="showTip(event, 'fs17', 41)" class="f">map</span>(<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs26', 42)" onmouseover="showTip(event, 'fs26', 42)" class="i">r</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs26', 43)" onmouseover="showTip(event, 'fs26', 43)" class="i">r</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 44)" onmouseover="showTip(event, 'fs27', 44)" class="i">Candidate</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="i">Id</span>))
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 46)" onmouseover="showTip(event, 'fs16', 46)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 47)" onmouseover="showTip(event, 'fs17', 47)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs18', 48)" onmouseover="showTip(event, 'fs18', 48)" class="i">s</span> <span class="k">-&gt;</span>
-      <span onmouseout="hideTip(event, 'fs19', 49)" onmouseover="showTip(event, 'fs19', 49)" class="f">sprintf</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">/2012/candidates/</span><span class="pf">%s</span><span class="s">.json?api-key=</span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs9', 50)" onmouseover="showTip(event, 'fs9', 50)" class="i">baseUrl</span> <span onmouseout="hideTip(event, 'fs18', 51)" onmouseover="showTip(event, 'fs18', 51)" class="i">s</span> <span onmouseout="hideTip(event, 'fs10', 52)" onmouseover="showTip(event, 'fs10', 52)" class="i">apiKey</span>)
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 53)" onmouseover="showTip(event, 'fs16', 53)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 54)" onmouseover="showTip(event, 'fs17', 54)" class="f">map</span> <span onmouseout="hideTip(event, 'fs14', 55)" onmouseover="showTip(event, 'fs14', 55)" class="t">candidateDetailsCollection</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 56)" onmouseover="showTip(event, 'fs20', 56)" class="f">Load</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 57)" onmouseover="showTip(event, 'fs16', 57)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 58)" onmouseover="showTip(event, 'fs21', 58)" class="f">toList</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 39)" onmouseover="showTip(event, 'fs25', 39)" class="i">candidateDetails</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs18', 40)" onmouseover="showTip(event, 'fs18', 40)" class="i">stateCandidates</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 41)" onmouseover="showTip(event, 'fs19', 41)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 42)" onmouseover="showTip(event, 'fs26', 42)" class="f">collect</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs27', 43)" onmouseover="showTip(event, 'fs27', 43)" class="i">c</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs27', 44)" onmouseover="showTip(event, 'fs27', 44)" class="i">c</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="i">Results</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 46)" onmouseover="showTip(event, 'fs19', 46)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 47)" onmouseover="showTip(event, 'fs20', 47)" class="f">map</span>(<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs29', 48)" onmouseover="showTip(event, 'fs29', 48)" class="i">r</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs29', 49)" onmouseover="showTip(event, 'fs29', 49)" class="i">r</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 50)" onmouseover="showTip(event, 'fs30', 50)" class="i">Candidate</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 51)" onmouseover="showTip(event, 'fs31', 51)" class="i">Id</span>))
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 52)" onmouseover="showTip(event, 'fs19', 52)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 53)" onmouseover="showTip(event, 'fs20', 53)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs21', 54)" onmouseover="showTip(event, 'fs21', 54)" class="i">s</span> <span class="k">-&gt;</span>
+      <span onmouseout="hideTip(event, 'fs22', 55)" onmouseover="showTip(event, 'fs22', 55)" class="f">sprintf</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">/candidates/</span><span class="pf">%s</span><span class="s">.json?api-key=</span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs9', 56)" onmouseover="showTip(event, 'fs9', 56)" class="i">baseUrl</span> <span onmouseout="hideTip(event, 'fs21', 57)" onmouseover="showTip(event, 'fs21', 57)" class="i">s</span> <span onmouseout="hideTip(event, 'fs10', 58)" onmouseover="showTip(event, 'fs10', 58)" class="i">apiKey</span>)
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 59)" onmouseover="showTip(event, 'fs19', 59)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 60)" onmouseover="showTip(event, 'fs20', 60)" class="f">map</span> <span onmouseout="hideTip(event, 'fs17', 61)" onmouseover="showTip(event, 'fs17', 61)" class="t">candidateDetailsCollection</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 62)" onmouseover="showTip(event, 'fs23', 62)" class="f">Load</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 63)" onmouseover="showTip(event, 'fs19', 63)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 64)" onmouseover="showTip(event, 'fs24', 64)" class="f">toList</span>
 </pre>
 </td>
 </tr>
 </table>
 
-<p>Deedle doesn't support expanding JsonValue types by default, so we'll add that into the library.  This is mostly unecessary to read.</p>
+<p>Deedle doesn't support expanding JsonValue types by default, so we'll add that into the library.  This is somewhat superfluous, as it's configuring Deedle.  Feel free to peruse if interested.  An issue was opened <a href="https://github.com/fslaborg/FsLab/issues/14">here</a> for those with interest.</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l"> 1: </span>
@@ -284,49 +190,25 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 <span class="l">14: </span>
 <span class="l">15: </span>
 <span class="l">16: </span>
-<span class="l">17: </span>
-<span class="l">18: </span>
-<span class="l">19: </span>
-<span class="l">20: </span>
-<span class="l">21: </span>
-<span class="l">22: </span>
-<span class="l">23: </span>
-<span class="l">24: </span>
-<span class="l">25: </span>
-<span class="l">26: </span>
-<span class="l">27: </span>
-<span class="l">28: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 59)" onmouseover="showTip(event, 'fs29', 59)" class="f">matchColumn</span> (<span onmouseout="hideTip(event, 'fs30', 60)" onmouseover="showTip(event, 'fs30', 60)" class="i">key</span><span class="o">:</span><span onmouseout="hideTip(event, 'fs31', 61)" onmouseover="showTip(event, 'fs31', 61)" class="t">string</span>) <span onmouseout="hideTip(event, 'fs32', 62)" onmouseover="showTip(event, 'fs32', 62)" class="i">value</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs33', 63)" onmouseover="showTip(event, 'fs33', 63)" class="i">seq</span> {
-        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs32', 64)" onmouseover="showTip(event, 'fs32', 64)" class="i">value</span> <span class="k">with</span>
-        | <span onmouseout="hideTip(event, 'fs34', 65)" onmouseover="showTip(event, 'fs34', 65)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 66)" onmouseover="showTip(event, 'fs35', 66)" class="p">String</span> (<span onmouseout="hideTip(event, 'fs18', 67)" onmouseover="showTip(event, 'fs18', 67)" class="i">s</span>)  <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs30', 68)" onmouseover="showTip(event, 'fs30', 68)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs36', 69)" onmouseover="showTip(event, 'fs36', 69)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs31', 70)" onmouseover="showTip(event, 'fs31', 70)" class="t">string</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs37', 71)" onmouseover="showTip(event, 'fs37', 71)" class="f">box</span> <span onmouseout="hideTip(event, 'fs18', 72)" onmouseover="showTip(event, 'fs18', 72)" class="i">s</span>
-        | <span onmouseout="hideTip(event, 'fs34', 73)" onmouseover="showTip(event, 'fs34', 73)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 74)" onmouseover="showTip(event, 'fs38', 74)" class="p">Boolean</span> (<span onmouseout="hideTip(event, 'fs39', 75)" onmouseover="showTip(event, 'fs39', 75)" class="i">b</span>) <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs30', 76)" onmouseover="showTip(event, 'fs30', 76)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs36', 77)" onmouseover="showTip(event, 'fs36', 77)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs40', 78)" onmouseover="showTip(event, 'fs40', 78)" class="t">bool</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs37', 79)" onmouseover="showTip(event, 'fs37', 79)" class="f">box</span> <span onmouseout="hideTip(event, 'fs39', 80)" onmouseover="showTip(event, 'fs39', 80)" class="i">b</span>
-        | <span onmouseout="hideTip(event, 'fs34', 81)" onmouseover="showTip(event, 'fs34', 81)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 82)" onmouseover="showTip(event, 'fs41', 82)" class="p">Float</span> (<span onmouseout="hideTip(event, 'fs42', 83)" onmouseover="showTip(event, 'fs42', 83)" class="i">f</span>)   <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs30', 84)" onmouseover="showTip(event, 'fs30', 84)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs36', 85)" onmouseover="showTip(event, 'fs36', 85)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs43', 86)" onmouseover="showTip(event, 'fs43', 86)" class="t">float</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs37', 87)" onmouseover="showTip(event, 'fs37', 87)" class="f">box</span> <span onmouseout="hideTip(event, 'fs42', 88)" onmouseover="showTip(event, 'fs42', 88)" class="i">f</span>
-        | <span onmouseout="hideTip(event, 'fs34', 89)" onmouseover="showTip(event, 'fs34', 89)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs44', 90)" onmouseover="showTip(event, 'fs44', 90)" class="p">Null</span> (_)    <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs30', 91)" onmouseover="showTip(event, 'fs30', 91)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs36', 92)" onmouseover="showTip(event, 'fs36', 92)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs45', 93)" onmouseover="showTip(event, 'fs45', 93)" class="t">obj</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs37', 94)" onmouseover="showTip(event, 'fs37', 94)" class="f">box</span> <span class="k">null</span>
-        | <span onmouseout="hideTip(event, 'fs34', 95)" onmouseover="showTip(event, 'fs34', 95)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 96)" onmouseover="showTip(event, 'fs46', 96)" class="p">Number</span> (<span onmouseout="hideTip(event, 'fs47', 97)" onmouseover="showTip(event, 'fs47', 97)" class="i">n</span>)  <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs30', 98)" onmouseover="showTip(event, 'fs30', 98)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs36', 99)" onmouseover="showTip(event, 'fs36', 99)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs48', 100)" onmouseover="showTip(event, 'fs48', 100)" class="t">decimal</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs37', 101)" onmouseover="showTip(event, 'fs37', 101)" class="f">box</span> <span onmouseout="hideTip(event, 'fs47', 102)" onmouseover="showTip(event, 'fs47', 102)" class="i">n</span>
-        | <span onmouseout="hideTip(event, 'fs34', 103)" onmouseover="showTip(event, 'fs34', 103)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 104)" onmouseover="showTip(event, 'fs49', 104)" class="p">Record</span> (<span onmouseout="hideTip(event, 'fs50', 105)" onmouseover="showTip(event, 'fs50', 105)" class="i">r</span>)  <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs30', 106)" onmouseover="showTip(event, 'fs30', 106)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs36', 107)" onmouseover="showTip(event, 'fs36', 107)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs34', 108)" onmouseover="showTip(event, 'fs34', 108)" class="t">JsonValue</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs37', 109)" onmouseover="showTip(event, 'fs37', 109)" class="f">box</span> <span onmouseout="hideTip(event, 'fs50', 110)" onmouseover="showTip(event, 'fs50', 110)" class="i">r</span>
-        | <span onmouseout="hideTip(event, 'fs34', 111)" onmouseover="showTip(event, 'fs34', 111)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs51', 112)" onmouseover="showTip(event, 'fs51', 112)" class="p">Array</span> (<span onmouseout="hideTip(event, 'fs52', 113)" onmouseover="showTip(event, 'fs52', 113)" class="i">a</span>)   <span class="k">-&gt;</span>
-            <span class="k">yield!</span> <span onmouseout="hideTip(event, 'fs52', 114)" onmouseover="showTip(event, 'fs52', 114)" class="i">a</span>
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 115)" onmouseover="showTip(event, 'fs16', 115)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 116)" onmouseover="showTip(event, 'fs17', 116)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs53', 117)" onmouseover="showTip(event, 'fs53', 117)" class="i">item</span> <span class="k">-&gt;</span> (<span onmouseout="hideTip(event, 'fs30', 118)" onmouseover="showTip(event, 'fs30', 118)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs36', 119)" onmouseover="showTip(event, 'fs36', 119)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs34', 120)" onmouseover="showTip(event, 'fs34', 120)" class="t">JsonValue</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs37', 121)" onmouseover="showTip(event, 'fs37', 121)" class="f">box</span> <span onmouseout="hideTip(event, 'fs53', 122)" onmouseover="showTip(event, 'fs53', 122)" class="i">item</span>))
+<span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs32', 65)" onmouseover="showTip(event, 'fs32', 65)" class="f">expander</span> <span onmouseout="hideTip(event, 'fs33', 66)" onmouseover="showTip(event, 'fs33', 66)" class="i">key</span> <span onmouseout="hideTip(event, 'fs34', 67)" onmouseover="showTip(event, 'fs34', 67)" class="i">value</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs35', 68)" onmouseover="showTip(event, 'fs35', 68)" class="i">seq</span> {
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs34', 69)" onmouseover="showTip(event, 'fs34', 69)" class="i">value</span> <span class="k">with</span>
+        | <span onmouseout="hideTip(event, 'fs36', 70)" onmouseover="showTip(event, 'fs36', 70)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 71)" onmouseover="showTip(event, 'fs37', 71)" class="p">String</span>  (<span onmouseout="hideTip(event, 'fs21', 72)" onmouseover="showTip(event, 'fs21', 72)" class="i">s</span>) <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs33', 73)" onmouseover="showTip(event, 'fs33', 73)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs38', 74)" onmouseover="showTip(event, 'fs38', 74)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs39', 75)" onmouseover="showTip(event, 'fs39', 75)" class="t">string</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs40', 76)" onmouseover="showTip(event, 'fs40', 76)" class="f">box</span> <span onmouseout="hideTip(event, 'fs21', 77)" onmouseover="showTip(event, 'fs21', 77)" class="i">s</span>
+        | <span onmouseout="hideTip(event, 'fs36', 78)" onmouseover="showTip(event, 'fs36', 78)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 79)" onmouseover="showTip(event, 'fs41', 79)" class="p">Boolean</span> (<span onmouseout="hideTip(event, 'fs42', 80)" onmouseover="showTip(event, 'fs42', 80)" class="i">b</span>) <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs33', 81)" onmouseover="showTip(event, 'fs33', 81)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs38', 82)" onmouseover="showTip(event, 'fs38', 82)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs43', 83)" onmouseover="showTip(event, 'fs43', 83)" class="t">bool</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs40', 84)" onmouseover="showTip(event, 'fs40', 84)" class="f">box</span> <span onmouseout="hideTip(event, 'fs42', 85)" onmouseover="showTip(event, 'fs42', 85)" class="i">b</span>
+        | <span onmouseout="hideTip(event, 'fs36', 86)" onmouseover="showTip(event, 'fs36', 86)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs44', 87)" onmouseover="showTip(event, 'fs44', 87)" class="p">Float</span>   (<span onmouseout="hideTip(event, 'fs45', 88)" onmouseover="showTip(event, 'fs45', 88)" class="i">f</span>) <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs33', 89)" onmouseover="showTip(event, 'fs33', 89)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs38', 90)" onmouseover="showTip(event, 'fs38', 90)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs46', 91)" onmouseover="showTip(event, 'fs46', 91)" class="t">float</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs40', 92)" onmouseover="showTip(event, 'fs40', 92)" class="f">box</span> <span onmouseout="hideTip(event, 'fs45', 93)" onmouseover="showTip(event, 'fs45', 93)" class="i">f</span>
+        | <span onmouseout="hideTip(event, 'fs36', 94)" onmouseover="showTip(event, 'fs36', 94)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 95)" onmouseover="showTip(event, 'fs47', 95)" class="p">Null</span>    (_) <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs33', 96)" onmouseover="showTip(event, 'fs33', 96)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs38', 97)" onmouseover="showTip(event, 'fs38', 97)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs48', 98)" onmouseover="showTip(event, 'fs48', 98)" class="t">obj</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs40', 99)" onmouseover="showTip(event, 'fs40', 99)" class="f">box</span> ()
+        | <span onmouseout="hideTip(event, 'fs36', 100)" onmouseover="showTip(event, 'fs36', 100)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 101)" onmouseover="showTip(event, 'fs49', 101)" class="p">Number</span>  (<span onmouseout="hideTip(event, 'fs50', 102)" onmouseover="showTip(event, 'fs50', 102)" class="i">n</span>) <span class="k">-&gt;</span> <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs33', 103)" onmouseover="showTip(event, 'fs33', 103)" class="i">key</span>,<span onmouseout="hideTip(event, 'fs38', 104)" onmouseover="showTip(event, 'fs38', 104)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs51', 105)" onmouseover="showTip(event, 'fs51', 105)" class="t">decimal</span><span class="o">&gt;</span>,<span onmouseout="hideTip(event, 'fs40', 106)" onmouseover="showTip(event, 'fs40', 106)" class="f">box</span> <span onmouseout="hideTip(event, 'fs50', 107)" onmouseover="showTip(event, 'fs50', 107)" class="i">n</span>
+        | <span onmouseout="hideTip(event, 'fs36', 108)" onmouseover="showTip(event, 'fs36', 108)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs52', 109)" onmouseover="showTip(event, 'fs52', 109)" class="p">Record</span>  (<span onmouseout="hideTip(event, 'fs53', 110)" onmouseover="showTip(event, 'fs53', 110)" class="i">r</span>) <span class="k">-&gt;</span> <span class="k">yield!</span> <span onmouseout="hideTip(event, 'fs53', 111)" onmouseover="showTip(event, 'fs53', 111)" class="i">r</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 112)" onmouseover="showTip(event, 'fs19', 112)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 113)" onmouseover="showTip(event, 'fs26', 113)" class="f">collect</span> ((<span class="o">&lt;||</span>)<span onmouseout="hideTip(event, 'fs32', 114)" onmouseover="showTip(event, 'fs32', 114)" class="f">expander</span>)
+        | <span onmouseout="hideTip(event, 'fs36', 115)" onmouseover="showTip(event, 'fs36', 115)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs54', 116)" onmouseover="showTip(event, 'fs54', 116)" class="p">Array</span>   (<span onmouseout="hideTip(event, 'fs55', 117)" onmouseover="showTip(event, 'fs55', 117)" class="i">a</span>) <span class="k">-&gt;</span>
+            <span class="k">yield!</span> <span onmouseout="hideTip(event, 'fs55', 118)" onmouseover="showTip(event, 'fs55', 118)" class="i">a</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 119)" onmouseover="showTip(event, 'fs19', 119)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 120)" onmouseover="showTip(event, 'fs26', 120)" class="f">collect</span> (<span onmouseout="hideTip(event, 'fs32', 121)" onmouseover="showTip(event, 'fs32', 121)" class="f">expander</span> <span class="s">&quot;arrayItem&quot;</span>)
     }
 
-
-<span onmouseout="hideTip(event, 'fs54', 123)" onmouseover="showTip(event, 'fs54', 123)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs55', 124)" onmouseover="showTip(event, 'fs55', 124)" class="i">CustomExpanders</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs56', 125)" onmouseover="showTip(event, 'fs56', 125)" class="f">Add</span>(<span onmouseout="hideTip(event, 'fs36', 126)" onmouseover="showTip(event, 'fs36', 126)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs57', 127)" onmouseover="showTip(event, 'fs57', 127)" class="t">JsonDocument</span><span class="o">&gt;</span>, <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs58', 128)" onmouseover="showTip(event, 'fs58', 128)" class="i">o</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs33', 129)" onmouseover="showTip(event, 'fs33', 129)" class="i">seq</span> {
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs59', 130)" onmouseover="showTip(event, 'fs59', 130)" class="i">doc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs58', 131)" onmouseover="showTip(event, 'fs58', 131)" class="i">o</span> <span class="o">:?&gt;</span> <span onmouseout="hideTip(event, 'fs2', 132)" onmouseover="showTip(event, 'fs2', 132)" class="i">FSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 133)" onmouseover="showTip(event, 'fs3', 133)" class="t">Data</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 134)" onmouseover="showTip(event, 'fs4', 134)" class="i">Runtime</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 135)" onmouseover="showTip(event, 'fs5', 135)" class="i">BaseTypes</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs57', 136)" onmouseover="showTip(event, 'fs57', 136)" class="t">JsonDocument</span>
-    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs59', 137)" onmouseover="showTip(event, 'fs59', 137)" class="i">doc</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs60', 138)" onmouseover="showTip(event, 'fs60', 138)" class="i">JsonValue</span> <span class="k">with</span> 
-    | <span onmouseout="hideTip(event, 'fs34', 139)" onmouseover="showTip(event, 'fs34', 139)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 140)" onmouseover="showTip(event, 'fs49', 140)" class="p">Record</span>(<span onmouseout="hideTip(event, 'fs61', 141)" onmouseover="showTip(event, 'fs61', 141)" class="i">map</span>) <span class="k">-&gt;</span>
-        <span class="k">for</span> (<span onmouseout="hideTip(event, 'fs62', 142)" onmouseover="showTip(event, 'fs62', 142)" class="i">k</span>,<span onmouseout="hideTip(event, 'fs63', 143)" onmouseover="showTip(event, 'fs63', 143)" class="i">v</span>) <span class="k">in</span> <span onmouseout="hideTip(event, 'fs61', 144)" onmouseover="showTip(event, 'fs61', 144)" class="i">map</span> <span class="k">do</span> <span class="k">yield!</span> (<span onmouseout="hideTip(event, 'fs29', 145)" onmouseover="showTip(event, 'fs29', 145)" class="f">matchColumn</span> <span onmouseout="hideTip(event, 'fs62', 146)" onmouseover="showTip(event, 'fs62', 146)" class="i">k</span> <span onmouseout="hideTip(event, 'fs63', 147)" onmouseover="showTip(event, 'fs63', 147)" class="i">v</span>)
-    | _ <span class="k">-&gt;</span> () })
-
-<span onmouseout="hideTip(event, 'fs54', 148)" onmouseover="showTip(event, 'fs54', 148)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs55', 149)" onmouseover="showTip(event, 'fs55', 149)" class="i">CustomExpanders</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs56', 150)" onmouseover="showTip(event, 'fs56', 150)" class="f">Add</span>(<span onmouseout="hideTip(event, 'fs36', 151)" onmouseover="showTip(event, 'fs36', 151)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs34', 152)" onmouseover="showTip(event, 'fs34', 152)" class="t">JsonValue</span><span class="o">&gt;</span>, <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs58', 153)" onmouseover="showTip(event, 'fs58', 153)" class="i">o</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs33', 154)" onmouseover="showTip(event, 'fs33', 154)" class="i">seq</span> {
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs64', 155)" onmouseover="showTip(event, 'fs64', 155)" class="i">doc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs58', 156)" onmouseover="showTip(event, 'fs58', 156)" class="i">o</span> <span class="o">:?&gt;</span> <span onmouseout="hideTip(event, 'fs34', 157)" onmouseover="showTip(event, 'fs34', 157)" class="t">JsonValue</span>
-    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs64', 158)" onmouseover="showTip(event, 'fs64', 158)" class="i">doc</span> <span class="k">with</span> 
-    | <span onmouseout="hideTip(event, 'fs34', 159)" onmouseover="showTip(event, 'fs34', 159)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 160)" onmouseover="showTip(event, 'fs49', 160)" class="p">Record</span>(<span onmouseout="hideTip(event, 'fs61', 161)" onmouseover="showTip(event, 'fs61', 161)" class="i">map</span>) <span class="k">-&gt;</span>
-        <span class="k">for</span> (<span onmouseout="hideTip(event, 'fs62', 162)" onmouseover="showTip(event, 'fs62', 162)" class="i">k</span>,<span onmouseout="hideTip(event, 'fs63', 163)" onmouseover="showTip(event, 'fs63', 163)" class="i">v</span>) <span class="k">in</span> <span onmouseout="hideTip(event, 'fs61', 164)" onmouseover="showTip(event, 'fs61', 164)" class="i">map</span> <span class="k">do</span> <span class="k">yield!</span> (<span onmouseout="hideTip(event, 'fs29', 165)" onmouseover="showTip(event, 'fs29', 165)" class="f">matchColumn</span> <span onmouseout="hideTip(event, 'fs62', 166)" onmouseover="showTip(event, 'fs62', 166)" class="i">k</span> <span onmouseout="hideTip(event, 'fs63', 167)" onmouseover="showTip(event, 'fs63', 167)" class="i">v</span>)
-    | _ <span class="k">-&gt;</span> () })
+<span onmouseout="hideTip(event, 'fs56', 122)" onmouseover="showTip(event, 'fs56', 122)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs57', 123)" onmouseover="showTip(event, 'fs57', 123)" class="i">CustomExpanders</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs58', 124)" onmouseover="showTip(event, 'fs58', 124)" class="f">Add</span>(<span onmouseout="hideTip(event, 'fs38', 125)" onmouseover="showTip(event, 'fs38', 125)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs59', 126)" onmouseover="showTip(event, 'fs59', 126)" class="t">JsonDocument</span><span class="o">&gt;</span>, <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs60', 127)" onmouseover="showTip(event, 'fs60', 127)" class="i">o</span> <span class="k">-&gt;</span> (<span onmouseout="hideTip(event, 'fs60', 128)" onmouseover="showTip(event, 'fs60', 128)" class="i">o</span> <span class="o">:?&gt;</span> <span onmouseout="hideTip(event, 'fs59', 129)" onmouseover="showTip(event, 'fs59', 129)" class="t">JsonDocument</span>)<span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 130)" onmouseover="showTip(event, 'fs36', 130)" class="i">JsonValue</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs32', 131)" onmouseover="showTip(event, 'fs32', 131)" class="f">expander</span> <span class="s">&quot;root&quot;</span>)
+<span onmouseout="hideTip(event, 'fs56', 132)" onmouseover="showTip(event, 'fs56', 132)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs57', 133)" onmouseover="showTip(event, 'fs57', 133)" class="i">CustomExpanders</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs58', 134)" onmouseover="showTip(event, 'fs58', 134)" class="f">Add</span>(<span onmouseout="hideTip(event, 'fs38', 135)" onmouseover="showTip(event, 'fs38', 135)" class="i">typeof</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs36', 136)" onmouseover="showTip(event, 'fs36', 136)" class="t">JsonValue</span><span class="o">&gt;</span>, <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs60', 137)" onmouseover="showTip(event, 'fs60', 137)" class="i">o</span> <span class="k">-&gt;</span>  <span onmouseout="hideTip(event, 'fs60', 138)" onmouseover="showTip(event, 'fs60', 138)" class="i">o</span> <span class="o">:?&gt;</span> <span onmouseout="hideTip(event, 'fs36', 139)" onmouseover="showTip(event, 'fs36', 139)" class="t">JsonValue</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs32', 140)" onmouseover="showTip(event, 'fs32', 140)" class="f">expander</span> <span class="s">&quot;root&quot;</span>)
 </pre>
 </td>
 </tr>
@@ -347,11 +229,11 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs65', 168)" onmouseover="showTip(event, 'fs65', 168)" class="i">dataFrame</span> <span class="o">=</span>
-    [<span class="k">for</span> <span onmouseout="hideTip(event, 'fs66', 169)" onmouseover="showTip(event, 'fs66', 169)" class="i">c</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs22', 170)" onmouseover="showTip(event, 'fs22', 170)" class="i">candidateDetails</span>
-      <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 171)" onmouseover="showTip(event, 'fs16', 171)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 172)" onmouseover="showTip(event, 'fs23', 172)" class="f">collect</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 173)" onmouseover="showTip(event, 'fs24', 173)" class="i">c</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 174)" onmouseover="showTip(event, 'fs24', 174)" class="i">c</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 175)" onmouseover="showTip(event, 'fs25', 175)" class="i">Results</span>) <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs67', 176)" onmouseover="showTip(event, 'fs67', 176)" class="f">series</span> [<span class="s">&quot;Candidate&quot;</span> <span class="o">=&gt;</span> <span onmouseout="hideTip(event, 'fs66', 177)" onmouseover="showTip(event, 'fs66', 177)" class="i">c</span>] ]
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs54', 178)" onmouseover="showTip(event, 'fs54', 178)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs68', 179)" onmouseover="showTip(event, 'fs68', 179)" class="f">ofRowsOrdinal</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs54', 180)" onmouseover="showTip(event, 'fs54', 180)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs69', 181)" onmouseover="showTip(event, 'fs69', 181)" class="f">expandAllCols</span> <span class="n">10</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs61', 141)" onmouseover="showTip(event, 'fs61', 141)" class="i">dataFrame</span> <span class="o">=</span>
+    [<span class="k">for</span> <span onmouseout="hideTip(event, 'fs62', 142)" onmouseover="showTip(event, 'fs62', 142)" class="i">c</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs25', 143)" onmouseover="showTip(event, 'fs25', 143)" class="i">candidateDetails</span>
+      <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 144)" onmouseover="showTip(event, 'fs19', 144)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 145)" onmouseover="showTip(event, 'fs26', 145)" class="f">collect</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs27', 146)" onmouseover="showTip(event, 'fs27', 146)" class="i">c</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs27', 147)" onmouseover="showTip(event, 'fs27', 147)" class="i">c</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 148)" onmouseover="showTip(event, 'fs28', 148)" class="i">Results</span>) <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs63', 149)" onmouseover="showTip(event, 'fs63', 149)" class="f">series</span> [<span class="s">&quot;Candidate&quot;</span> <span class="o">=&gt;</span> <span onmouseout="hideTip(event, 'fs62', 150)" onmouseover="showTip(event, 'fs62', 150)" class="i">c</span>] ]
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 151)" onmouseover="showTip(event, 'fs56', 151)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs64', 152)" onmouseover="showTip(event, 'fs64', 152)" class="f">ofRowsOrdinal</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 153)" onmouseover="showTip(event, 'fs56', 153)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs65', 154)" onmouseover="showTip(event, 'fs65', 154)" class="f">expandAllCols</span> <span class="n">10</span>
 </pre>
 </td>
 </tr>
@@ -366,9 +248,9 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs70', 182)" onmouseover="showTip(event, 'fs70', 182)" class="i">parties</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs65', 183)" onmouseover="showTip(event, 'fs65', 183)" class="i">dataFrame</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs54', 184)" onmouseover="showTip(event, 'fs54', 184)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs71', 185)" onmouseover="showTip(event, 'fs71', 185)" class="f">groupRowsByString</span> <span class="s">&quot;Candidate.party&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs66', 155)" onmouseover="showTip(event, 'fs66', 155)" class="i">parties</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs61', 156)" onmouseover="showTip(event, 'fs61', 156)" class="i">dataFrame</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 157)" onmouseover="showTip(event, 'fs56', 157)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs67', 158)" onmouseover="showTip(event, 'fs67', 158)" class="f">groupRowsByString</span> <span class="s">&quot;Candidate.party&quot;</span>
 </pre>
 </td>
 </tr>
@@ -384,10 +266,10 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs72', 186)" onmouseover="showTip(event, 'fs72', 186)" class="i">numberOfCandidates</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs70', 187)" onmouseover="showTip(event, 'fs70', 187)" class="i">parties</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs54', 188)" onmouseover="showTip(event, 'fs54', 188)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs73', 189)" onmouseover="showTip(event, 'fs73', 189)" class="f">nest</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs74', 190)" onmouseover="showTip(event, 'fs74', 190)" class="t">Series</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs75', 191)" onmouseover="showTip(event, 'fs75', 191)" class="f">mapValues</span> <span onmouseout="hideTip(event, 'fs54', 192)" onmouseover="showTip(event, 'fs54', 192)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs76', 193)" onmouseover="showTip(event, 'fs76', 193)" class="f">countRows</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs68', 159)" onmouseover="showTip(event, 'fs68', 159)" class="i">numberOfCandidates</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs66', 160)" onmouseover="showTip(event, 'fs66', 160)" class="i">parties</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 161)" onmouseover="showTip(event, 'fs56', 161)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs69', 162)" onmouseover="showTip(event, 'fs69', 162)" class="f">nest</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs70', 163)" onmouseover="showTip(event, 'fs70', 163)" class="t">Series</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs71', 164)" onmouseover="showTip(event, 'fs71', 164)" class="f">mapValues</span> <span onmouseout="hideTip(event, 'fs56', 165)" onmouseover="showTip(event, 'fs56', 165)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs72', 166)" onmouseover="showTip(event, 'fs72', 166)" class="f">countRows</span>
 </pre>
 </td>
 </tr>
@@ -401,8 +283,8 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs77', 194)" onmouseover="showTip(event, 'fs77', 194)" class="i">partyFinancesSum</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs70', 195)" onmouseover="showTip(event, 'fs70', 195)" class="i">parties</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs54', 196)" onmouseover="showTip(event, 'fs54', 196)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs78', 197)" onmouseover="showTip(event, 'fs78', 197)" class="f">applyLevel</span> <span onmouseout="hideTip(event, 'fs79', 198)" onmouseover="showTip(event, 'fs79', 198)" class="f">fst</span> <span onmouseout="hideTip(event, 'fs80', 199)" onmouseover="showTip(event, 'fs80', 199)" class="t">Stats</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs81', 200)" onmouseover="showTip(event, 'fs81', 200)" class="f">sum</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs82', 201)" onmouseover="showTip(event, 'fs82', 201)" class="i">partyFinancesStdDev</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs70', 202)" onmouseover="showTip(event, 'fs70', 202)" class="i">parties</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs54', 203)" onmouseover="showTip(event, 'fs54', 203)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs78', 204)" onmouseover="showTip(event, 'fs78', 204)" class="f">applyLevel</span> <span onmouseout="hideTip(event, 'fs79', 205)" onmouseover="showTip(event, 'fs79', 205)" class="f">fst</span> <span onmouseout="hideTip(event, 'fs80', 206)" onmouseover="showTip(event, 'fs80', 206)" class="t">Stats</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs83', 207)" onmouseover="showTip(event, 'fs83', 207)" class="f">stdDev</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs73', 167)" onmouseover="showTip(event, 'fs73', 167)" class="i">partyFinancesSum</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs66', 168)" onmouseover="showTip(event, 'fs66', 168)" class="i">parties</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 169)" onmouseover="showTip(event, 'fs56', 169)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs74', 170)" onmouseover="showTip(event, 'fs74', 170)" class="f">applyLevel</span> <span onmouseout="hideTip(event, 'fs75', 171)" onmouseover="showTip(event, 'fs75', 171)" class="f">fst</span> <span onmouseout="hideTip(event, 'fs76', 172)" onmouseover="showTip(event, 'fs76', 172)" class="t">Stats</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs77', 173)" onmouseover="showTip(event, 'fs77', 173)" class="f">sum</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs78', 174)" onmouseover="showTip(event, 'fs78', 174)" class="i">partyFinancesStdDev</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs66', 175)" onmouseover="showTip(event, 'fs66', 175)" class="i">parties</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 176)" onmouseover="showTip(event, 'fs56', 176)" class="t">Frame</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs74', 177)" onmouseover="showTip(event, 'fs74', 177)" class="f">applyLevel</span> <span onmouseout="hideTip(event, 'fs75', 178)" onmouseover="showTip(event, 'fs75', 178)" class="f">fst</span> <span onmouseout="hideTip(event, 'fs76', 179)" onmouseover="showTip(event, 'fs76', 179)" class="t">Stats</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs79', 180)" onmouseover="showTip(event, 'fs79', 180)" class="f">stdDev</span>
 </pre>
 </td>
 </tr>
@@ -411,9 +293,9 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 <h1>Charting!</h1>
 
 <p>Chart some interesting things.
- - How many candidates did each party have in 2012?<br />
- - Which party had the most capital?
- - Which party had the most capital PER candidate?</p>
+  - How many candidates did each party have in 2012?<br />
+  - Which party had the most capital?
+  - Which party had the most capital PER candidate?</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
@@ -423,10 +305,10 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span onmouseout="hideTip(event, 'fs72', 208)" onmouseover="showTip(event, 'fs72', 208)" class="i">numberOfCandidates</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs84', 209)" onmouseover="showTip(event, 'fs84', 209)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs85', 210)" onmouseover="showTip(event, 'fs85', 210)" class="f">Pie</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs84', 211)" onmouseover="showTip(event, 'fs84', 211)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs86', 212)" onmouseover="showTip(event, 'fs86', 212)" class="f">WithLegend</span> <span class="k">true</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs84', 213)" onmouseover="showTip(event, 'fs84', 213)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs87', 214)" onmouseover="showTip(event, 'fs87', 214)" class="f">WithTitle</span> <span class="s">&quot;Number of candidates in each party&quot;</span>
+<span onmouseout="hideTip(event, 'fs68', 181)" onmouseover="showTip(event, 'fs68', 181)" class="i">numberOfCandidates</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs80', 182)" onmouseover="showTip(event, 'fs80', 182)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs81', 183)" onmouseover="showTip(event, 'fs81', 183)" class="f">Pie</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs80', 184)" onmouseover="showTip(event, 'fs80', 184)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs82', 185)" onmouseover="showTip(event, 'fs82', 185)" class="f">WithLegend</span> <span class="k">true</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs80', 186)" onmouseover="showTip(event, 'fs80', 186)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs83', 187)" onmouseover="showTip(event, 'fs83', 187)" class="f">WithTitle</span> <span class="s">&quot;Number of candidates in each party&quot;</span>
 </pre>
 </td>
 </tr>
@@ -439,14 +321,12 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 <span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
-<span class="l">4: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span onmouseout="hideTip(event, 'fs77', 215)" onmouseover="showTip(event, 'fs77', 215)" class="i">partyFinancesSum</span><span class="o">?</span><span class="i">``Candidate.total_contributions``</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs84', 216)" onmouseover="showTip(event, 'fs84', 216)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs88', 217)" onmouseover="showTip(event, 'fs88', 217)" class="f">Bar</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs84', 218)" onmouseover="showTip(event, 'fs84', 218)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs86', 219)" onmouseover="showTip(event, 'fs86', 219)" class="f">WithLegend</span> <span class="k">true</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs84', 220)" onmouseover="showTip(event, 'fs84', 220)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs87', 221)" onmouseover="showTip(event, 'fs87', 221)" class="f">WithTitle</span> <span class="s">&quot;Contributions for each party&quot;</span>
+<span onmouseout="hideTip(event, 'fs73', 188)" onmouseover="showTip(event, 'fs73', 188)" class="i">partyFinancesSum</span><span class="o">?</span><span class="i">``Candidate.total_contributions``</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs80', 189)" onmouseover="showTip(event, 'fs80', 189)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs84', 190)" onmouseover="showTip(event, 'fs84', 190)" class="f">Bar</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs80', 191)" onmouseover="showTip(event, 'fs80', 191)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs83', 192)" onmouseover="showTip(event, 'fs83', 192)" class="f">WithTitle</span> <span class="s">&quot;Contributions for each party&quot;</span>
 </pre>
 </td>
 </tr>
@@ -465,17 +345,17 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-(<span onmouseout="hideTip(event, 'fs77', 222)" onmouseover="showTip(event, 'fs77', 222)" class="i">partyFinancesSum</span><span class="o">?</span><span class="i">``Candidate.total_contributions``</span>) <span class="o">/</span> (<span onmouseout="hideTip(event, 'fs72', 223)" onmouseover="showTip(event, 'fs72', 223)" class="i">numberOfCandidates</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs74', 224)" onmouseover="showTip(event, 'fs74', 224)" class="t">Series</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs75', 225)" onmouseover="showTip(event, 'fs75', 225)" class="f">mapValues</span> <span onmouseout="hideTip(event, 'fs43', 226)" onmouseover="showTip(event, 'fs43', 226)" class="f">float</span>) 
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs84', 227)" onmouseover="showTip(event, 'fs84', 227)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs85', 228)" onmouseover="showTip(event, 'fs85', 228)" class="f">Pie</span> 
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs84', 229)" onmouseover="showTip(event, 'fs84', 229)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs86', 230)" onmouseover="showTip(event, 'fs86', 230)" class="f">WithLegend</span> <span class="k">true</span> 
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs84', 231)" onmouseover="showTip(event, 'fs84', 231)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs87', 232)" onmouseover="showTip(event, 'fs87', 232)" class="f">WithTitle</span> <span class="s">&quot;Contributions per candidate&quot;</span>
+(<span onmouseout="hideTip(event, 'fs73', 193)" onmouseover="showTip(event, 'fs73', 193)" class="i">partyFinancesSum</span><span class="o">?</span><span class="i">``Candidate.total_contributions``</span>) <span class="o">/</span>(<span onmouseout="hideTip(event, 'fs68', 194)" onmouseover="showTip(event, 'fs68', 194)" class="i">numberOfCandidates</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs70', 195)" onmouseover="showTip(event, 'fs70', 195)" class="t">Series</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs71', 196)" onmouseover="showTip(event, 'fs71', 196)" class="f">mapValues</span> <span onmouseout="hideTip(event, 'fs46', 197)" onmouseover="showTip(event, 'fs46', 197)" class="f">float</span>) 
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs80', 198)" onmouseover="showTip(event, 'fs80', 198)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs81', 199)" onmouseover="showTip(event, 'fs81', 199)" class="f">Pie</span> 
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs80', 200)" onmouseover="showTip(event, 'fs80', 200)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs82', 201)" onmouseover="showTip(event, 'fs82', 201)" class="f">WithLegend</span> <span class="k">true</span> 
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs80', 202)" onmouseover="showTip(event, 'fs80', 202)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs83', 203)" onmouseover="showTip(event, 'fs83', 203)" class="f">WithTitle</span> <span class="s">&quot;Average contributions per candidate&quot;</span>
 </pre>
 </td>
 </tr>
 </table>
 
 <iframe src="/chart-3" scrolling="no" seamless="seamless"></iframe>
-And it looks like although the republican party had more candidates, democrats raised more money.  Additionally, the WFP party (which was so small as to not even register on our first exposure) raisd a fair amount of money for their one candidate.
+And it looks like although the republican party had more candidates, democrats raised more money.  Additionally, the WFP party (which was so small as to not even register on our first exposure) raisd a fair amount of money for their **one** candidate.
 
         </div>
       </div>
