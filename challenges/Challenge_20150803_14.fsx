@@ -167,3 +167,7 @@ Cool property of data frames: division and other mathematical operatoins are don
 <iframe src="/chart-3" scrolling="no" seamless="seamless"></iframe>
 And it looks like although the republican party had more candidates, democrats raised more money.  Additionally, the WFP party (which was so small as to not even register on our first exposure) raisd a fair amount of money for their **one** candidate.
 *)
+
+(**
+No .NET Fiddle available, as .NET Fiddle does not support Type Providers (and rightly so).
+*)
