@@ -1,5 +1,13 @@
 (**
-# Setup
+# .NET Challenge for August 3, 2015
+
+## Prompt
+
+The official format for submissions is https://dotnetfiddle.net. Please post a link to your submission in a comment on this post.
+
+The New York Times has a number of free public APIs available. With election season approaching, I though it would be appropriate to look at the Campaign Finance Endpoint. Your challenge is to tell me something interesting based on data returned from this API.
+
+## Setup
 *)
 #load "../packages/FsLab/FsLab.fsx"
 
@@ -32,7 +40,7 @@ let states = ["AL";"AK";"AZ";"AR";"CA";"CO";"CT";"DE";"FL";"GA";"HI";
               "VT";"VA";"WA";"WV";"WI";"WY"]
 
 (**
-# Type providers
+## Type providers
 
 Type providers are super-classes that allow types to be generated (and compiled into CLI) using dynamic data.  Examples of data sources can be SQL databases, JSON, or CSV files.  Type providers can be thought of as programattic T4 templates, without the double-compilation overhead that T4s have.
 
@@ -47,7 +55,7 @@ type candidateCollection = JsonProvider<candidateUrl>
 type candidateDetailsCollection = JsonProvider<detailsUrl>
 
 (**
-# Data querying
+## Data querying
 
 Next, let's find all candidates in all states.
 *)
@@ -89,7 +97,7 @@ Frame.CustomExpanders.Add(typeof<JsonDocument>, fun o -> (o :?> JsonDocument).Js
 Frame.CustomExpanders.Add(typeof<JsonValue>, fun o ->  o :?> JsonValue |> expander "root")
 
 (**
-# Deedle for analysis
+## Deedle for analysis
 
 Deedle is something like an in-memory table structure, but not quite.  The frame concept is present in other languages (R, python [Pandas], and more).  Deedle is F#'s most prevelant implementation of the data frame pattern.
 
@@ -123,7 +131,7 @@ let partyFinancesSum = parties |> Frame.applyLevel fst Stats.sum
 let partyFinancesStdDev = parties |> Frame.applyLevel fst Stats.stdDev
 
 (**
-# Charting!
+# Charting & Results!
 
 Chart some interesting things.
 
