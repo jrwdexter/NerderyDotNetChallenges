@@ -20,6 +20,11 @@ let challenges = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "challenges"))
                  |> Seq.collect (fun x -> x)
                  |> Seq.toList
 
+let charts = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "charts")).GetFiles()
+                 |> Seq.filter (fun f -> f.Extension = ".html")
+                 |> Seq.mapi (fun i c -> path (sprintf "/chart-%d" (i+1)) >>= file c.FullName)
+                 |> Seq.toList
+
 let config = 
     let port = System.Environment.GetEnvironmentVariable("PORT")
     { defaultConfig with 
@@ -29,7 +34,7 @@ let config =
 
 let app : WebPart =
   choose [
-    GET >>= choose (challenges |> List.append [
+    GET >>= choose (challenges |> List.append charts |> List.append [
       path "/styles.css" >>= file (Path.Combine(__SOURCE_DIRECTORY__,"template/fsharp-style.css")) ;
       path "/" >>= file (Path.Combine(__SOURCE_DIRECTORY__, "web/index.html"))
       ] )
