@@ -174,3 +174,7 @@ This is:
 (**
   Timing result: `Real: 00:00:00.627, CPU: 00:00:00.609, GC gen0: 27, gen1: 8, gen2: 1`
 *)
+
+(**
+An adjusted version of this solution can be found [here](https://dotnetfiddle.net/3QfdPN) (needed to adjust for usage of F# 3, instead of 4)
+*)
