@@ -79,8 +79,8 @@ type CandyCanePlant =
   }
 
 (**
-  ### Helper methods
-  These methods exist to be utilized in the algorithm below, and help make it more idiomatic.
+### Helper methods
+These methods exist to be utilized in the algorithm below, and help make it more idiomatic.
 *)
 // Pattern match a list that has at least a pair of unbred plants with a tuple of (Unbred,AlreadyBred) plant lists.
 let (|HasUnbred|_|) plants =
