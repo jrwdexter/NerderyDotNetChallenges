@@ -115,7 +115,7 @@ let makePlants list =
 ### The algorithm
 The big implementation. This is a recursive method that takes in a list of plants, and returns a list of lists of plants (possible outcomes of breedings)
 So if we entered plants with production values of [1,2], we should get [[1,2,2],[1,2,1]], since there are two ways to breed this pair.
-This method is then `O(n!^2)`, due to combining all permutations of plants, and knowing that order matters.
+This method is then `O(n!^2/n)`, due to combining all permutations of plants, and knowing that order matters.
 *)
 // Our recursive method to find all breeding plants
 let rec findAllBreedingOptions plants =
@@ -162,15 +162,20 @@ This is:
   - `.25 Megabytes` for 5 plants
   - `9.06 Megabytes` for 6 plants
   - `450 Megabytes` for 7 plants
+  - ...
   - `227.5 Terabytes` for 10 plants
 
 *)
 #time
-[1..6] |> makePlants |> findAllBreedingOptions
+[2;4;10;12;6;3]
+[2;10;3;50;24;19]
+|> makePlants |> findAllBreedingOptions
 |> Seq.sortBy (fun l -> l |> List.sumBy (fun c -> c.Productivity))
 |> Seq.rev
 |> Seq.head
+|> Seq.sumBy (fun f -> f.Productivity)
 
+[1..7]
 (**
   Timing result: `Real: 00:00:00.627, CPU: 00:00:00.609, GC gen0: 27, gen1: 8, gen2: 1`
 *)

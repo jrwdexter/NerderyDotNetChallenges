@@ -226,7 +226,7 @@
 
 <p>The big implementation. This is a recursive method that takes in a list of plants, and returns a list of lists of plants (possible outcomes of breedings)
 So if we entered plants with production values of [1,2], we should get [[1,2,2],[1,2,1]], since there are two ways to breed this pair.
-This method is then <code>O(n!^2)</code>, due to combining all permutations of plants, and knowing that order matters.</p>
+This method is then <code>O(n!^2/n)</code>, due to combining all permutations of plants, and knowing that order matters.</p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l"> 1: </span>
@@ -305,23 +305,34 @@ A list in F# is a linked list, meaning it will add another <code>2 bytes</code> 
 <li><code>.25 Megabytes</code> for 5 plants</li>
 <li><code>9.06 Megabytes</code> for 6 plants</li>
 <li><code>450 Megabytes</code> for 7 plants</li>
+<li>...</li>
 <li><code>227.5 Terabytes</code> for 10 plants</li>
 </ul>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
 <span class="prep">#time</span>
-[<span class="n">1..</span><span class="n">6</span>] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 100)" onmouseover="showTip(event, 'fs21', 100)" class="f">makePlants</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 101)" onmouseover="showTip(event, 'fs25', 101)" class="f">findAllBreedingOptions</span>
+[<span class="n">2</span>;<span class="n">4</span>;<span class="n">10</span>;<span class="n">12</span>;<span class="n">6</span>;<span class="n">3</span>]
+[<span class="n">2</span>;<span class="n">10</span>;<span class="n">3</span>;<span class="n">50</span>;<span class="n">24</span>;<span class="n">19</span>]
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 100)" onmouseover="showTip(event, 'fs21', 100)" class="f">makePlants</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 101)" onmouseover="showTip(event, 'fs25', 101)" class="f">findAllBreedingOptions</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs36', 102)" onmouseover="showTip(event, 'fs36', 102)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 103)" onmouseover="showTip(event, 'fs37', 103)" class="f">sortBy</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs38', 104)" onmouseover="showTip(event, 'fs38', 104)" class="i">l</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs38', 105)" onmouseover="showTip(event, 'fs38', 105)" class="i">l</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 106)" onmouseover="showTip(event, 'fs8', 106)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 107)" onmouseover="showTip(event, 'fs39', 107)" class="f">sumBy</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs40', 108)" onmouseover="showTip(event, 'fs40', 108)" class="i">c</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs40', 109)" onmouseover="showTip(event, 'fs40', 109)" class="i">c</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 110)" onmouseover="showTip(event, 'fs4', 110)" class="i">Productivity</span>))
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs36', 111)" onmouseover="showTip(event, 'fs36', 111)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 112)" onmouseover="showTip(event, 'fs41', 112)" class="f">rev</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs36', 113)" onmouseover="showTip(event, 'fs36', 113)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs42', 114)" onmouseover="showTip(event, 'fs42', 114)" class="f">head</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs36', 115)" onmouseover="showTip(event, 'fs36', 115)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs43', 116)" onmouseover="showTip(event, 'fs43', 116)" class="f">sumBy</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 117)" onmouseover="showTip(event, 'fs44', 117)" class="i">f</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 118)" onmouseover="showTip(event, 'fs44', 118)" class="i">f</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 119)" onmouseover="showTip(event, 'fs4', 119)" class="i">Productivity</span>)
+
+[<span class="n">1..</span><span class="n">7</span>]
 </pre>
 </td>
 </tr>
