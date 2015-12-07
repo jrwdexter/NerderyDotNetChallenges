@@ -93,8 +93,8 @@
 </td>
 <td class="snippet"><pre class="fssnip">
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="i">baseUrl</span> <span class="o">=</span> <span class="s">&quot;http://api.nytimes.com/svc/elections/us/v3/finances/2012&quot;</span>
-<span class="c">// let apiKey = &quot;3938ef998ede56fd9ba55e3b2ccefa37:16:72625105&quot;</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="i">apiKey</span> <span class="o">=</span> <span class="s">&quot;316ed00bf4b54d8ba9a625e84f78d80a:12:72637909&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="i">apiKey</span> <span class="o">=</span> <span class="s">&quot;3938ef998ede56fd9ba55e3b2ccefa37:16:72625105&quot;</span>
+<span class="c">// let apiKey = &quot;316ed00bf4b54d8ba9a625e84f78d80a:12:72637909&quot;</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="i">states</span> <span class="o">=</span> [<span class="s">&quot;AL&quot;</span>;<span class="s">&quot;AK&quot;</span>;<span class="s">&quot;AZ&quot;</span>;<span class="s">&quot;AR&quot;</span>;<span class="s">&quot;CA&quot;</span>;<span class="s">&quot;CO&quot;</span>;<span class="s">&quot;CT&quot;</span>;<span class="s">&quot;DE&quot;</span>;<span class="s">&quot;FL&quot;</span>;<span class="s">&quot;GA&quot;</span>;<span class="s">&quot;HI&quot;</span>;
               <span class="s">&quot;ID&quot;</span>;<span class="s">&quot;IL&quot;</span>;<span class="s">&quot;IN&quot;</span>;<span class="s">&quot;IA&quot;</span>;<span class="s">&quot;KS&quot;</span>;<span class="s">&quot;KY&quot;</span>;<span class="s">&quot;LA&quot;</span>;<span class="s">&quot;ME&quot;</span>;<span class="s">&quot;MD&quot;</span>;<span class="s">&quot;MA&quot;</span>;<span class="s">&quot;MI&quot;</span>;
@@ -124,9 +124,9 @@ Doing this gives strongly typed intellisense-capable classes which can load info
 </td>
 <td class="snippet"><pre class="fssnip">
 <span class="k">let</span> [&lt;<span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="t">Literal</span>&gt;] <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="i">candidateUrl</span> <span class="o">=</span> <span class="s">&quot;http://api.nytimes.com/svc/elections/us/v3/finances/\</span>
-<span class="s">2012/seats/MN.json?api-key=316ed00bf4b54d8ba9a625e84f78d80a:12:72637909&quot;</span>
+<span class="s">2012/seats/MN.json?api-key=3938ef998ede56fd9ba55e3b2ccefa37:16:72625105&quot;</span>
 <span class="k">let</span> [&lt;<span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="t">Literal</span>&gt;] <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="i">detailsUrl</span> <span class="o">=</span> <span class="s">&quot;http://api.nytimes.com/svc/elections/us/v3/finances/\</span>
-<span class="s">2012/candidates/H2MN07097.json?api-key=316ed00bf4b54d8ba9a625e84f78d80a:12:72637909&quot;</span>
+<span class="s">2012/candidates/H2MN07097.json?api-key=3938ef998ede56fd9ba55e3b2ccefa37:16:72625105&quot;</span>
 <span class="k">type</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="t">candidateCollection</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 19)" onmouseover="showTip(event, 'fs16', 19)" class="t">JsonProvider</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="i">candidateUrl</span><span class="o">&gt;</span>
 <span class="k">type</span> <span onmouseout="hideTip(event, 'fs17', 21)" onmouseover="showTip(event, 'fs17', 21)" class="t">candidateDetailsCollection</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="t">JsonProvider</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="i">detailsUrl</span><span class="o">&gt;</span>
 </pre>

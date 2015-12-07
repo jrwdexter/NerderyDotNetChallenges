@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>.NET Challenge for November 30, 2015
+</title>
+  <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link href="/styles.css" rel="stylesheet">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-23038189-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</head>
+<body>
+<a href="https://github.com/mandest/NerderyDotNetChallenges"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
+  <div class="container">
+    <div class="masthead">
+      <ul class="nav nav-pills pull-right">
+        <li><a href="https://dotnet.nerderylabs.com/">.NET Challenges</a></li>
+      </ul>
+      <h3><a href="/"><span class="muted">Nerdery .NET Challenges in </span>F#</a></h3>
+    </div>
+    <div class="row">
+      <div class="span9">
+        <div class="markdown-body">
+          <h1>.NET Challenge for November 30, 2015</h1>
+
+<h2>Prompt</h2>
+
+<h2>Challenge Accepted</h2>
+
+<p>The official format for submissions is <a href="https://dotnetfiddle.net"><a href="https://dotnetfiddle.net">https://dotnetfiddle.net</a></a>.  Please post a link to your submission in a comment to this post, or via email if (and when) comments still don't work.</p>
+
+<p>This week’s challenge is the fourth in a series of cross-backend technology challenges (JVM, .NET, Ruby, and PHP). Code can be submitted in any language, and each submission will only be graded against like-disciplined submissions.</p>
+
+<hr />
+
+<p>Last year, {INSERT<em>HOLIDAY</em>MYTH_HERE} (hereafter referred to as "Santa") created a special <a href="https://en.wikipedia.org/wiki/Gmo">GMO</a>: the <strong>Candy Cane Plant</strong>. However, after creating the plant Santa and his biologist friends found out that it suffered from an extreme deficiency: each plant could only breed once. Each candy cane plant has the following <strong>properties</strong> and <strong>methods</strong>:</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">public</span> <span class="k">class</span> <span class="i">CandyCanePlant</span>
+{
+  <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">int</span> <span class="i">CandyCanesProducedPerWeek</span> { <span class="i">get</span>; <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">set</span>; }
+  <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">bool</span> <span class="i">HasBred</span> { <span class="i">get</span>; <span onmouseout="hideTip(event, 'fs2', 4)" onmouseover="showTip(event, 'fs2', 4)" class="i">set</span>; }
+}
+
+<span class="k">public</span> <span class="k">class</span> <span class="i">BreederService</span>
+{
+  <span class="k">public</span> <span class="i">CandyCanePlant</span> <span class="i">Breed</span>(<span class="i">CandyCanePlant</span> <span class="i">father</span>, <span class="i">CandyCanePlant</span> <span class="i">mother</span>);
+}
+</pre>
+</td>
+</tr>
+</table>
+
+<p>A newly bred candy cane plant has a production value of:</p>
+
+<p><code>Math.Pow(fathersProductionValue, mothersProductionValue) % (fathersProductionValue + mothersProductionValue)</code></p>
+
+<p>and has a <code>HasBred</code> value of <strong>false</strong>.</p>
+
+<p>Write code that optimizes the total number of candy canes produced per week given an initial stock of <code>CandyCanePlant[]</code> plants, producing a new collection of <code>CandyCanePlant[]</code>s. The output of your code should also produce the total number of candy canes produced per week with the bred stock.</p>
+
+<p>For example, given the following initial stock:</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="i">CandyCanePlant</span> { <span class="i">CandyCanesPerWeek</span> <span class="o">=</span> <span class="n">5</span>}
+<span class="i">CandyCanePlant</span> { <span class="i">CandyCanesPerWeek</span> <span class="o">=</span> <span class="n">3</span>}
+<span class="i">CandyCanePlant</span> { <span class="i">CandyCanesPerWeek</span> <span class="o">=</span> <span class="n">2</span>}
+</pre>
+</td>
+</tr>
+</table>
+
+<p>Your code should inform Santa what his final stock will be, as well as the total production value of said stock. The above example should produce a total production output of</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="i">CandyCanePlant</span> { <span class="i">CandyCanesPerWeek</span> <span class="o">=</span> <span class="n">5</span>, <span class="i">HasBred</span> <span class="o">=</span> <span class="k">true</span>}
+<span class="i">CandyCanePlant</span> { <span class="i">CandyCanesPerWeek</span> <span class="o">=</span> <span class="n">5</span>, <span class="i">HasBred</span> <span class="o">=</span> <span class="k">true</span>}
+<span class="i">CandyCanePlant</span> { <span class="i">CandyCanesPerWeek</span> <span class="o">=</span> <span class="n">4</span>, <span class="i">HasBred</span> <span class="o">=</span> <span class="k">false</span>}
+<span class="i">CandyCanePlant</span> { <span class="i">CandyCanesPerWeek</span> <span class="o">=</span> <span class="n">3</span>, <span class="i">HasBred</span> <span class="o">=</span> <span class="k">true</span>}
+<span class="i">CandyCanePlant</span> { <span class="i">CandyCanesPerWeek</span> <span class="o">=</span> <span class="n">2</span>, <span class="i">HasBred</span> <span class="o">=</span> <span class="k">true</span>}
+</pre>
+</td>
+</tr>
+</table>
+
+<p>and a production value of <strong>19 per week</strong>.</p>
+
+<p>Code will be judged based on a large input stock of Candy Cane Plants.</p>
+
+<p><strong>Bonus Problem</strong> (hard!):</p>
+
+<p>The above code models an ideal world - in the real world, Candy Cane Plants experience a production reduction of <strong>1 candy cane per week</strong>, until they hit 0 candy canes produced. Assuming that breeding takes <strong>1 week</strong> and produces no candy canes, inform Santa of how many total candy canes will be produced in the optimal breeding scenario.</p>
+
+<h2>Note that breeding in certain weeks may produce more optimal plants than other weeks, and that the optimal breeding scenario may not be identical to the solution found above.</h2>
+
+<h2>My result</h2>
+
+<h3>Types</h3>
+
+<p>Here's our candy cane plant type</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">type</span> <span class="t">CandyCanePlant</span> <span class="o">=</span>
+  {
+    <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">Productivity</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="t">double</span>
+    <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="i">HasBred</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs3', 8)" onmouseover="showTip(event, 'fs3', 8)" class="t">bool</span>
+  }
+</pre>
+</td>
+</tr>
+</table>
+
+<p>### Helper methods
+  These methods exist to be utilized in the algorithm below, and help make it more idiomatic.</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
+<span class="l">24: </span>
+<span class="l">25: </span>
+<span class="l">26: </span>
+<span class="l">27: </span>
+<span class="l">28: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="c">// Pattern match a list that has at least a pair of unbred plants with a tuple of (Unbred,AlreadyBred) plant lists.</span>
+<span class="k">let</span> (|<span class="p">HasUnbred</span>|_|) <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="i">plants</span> <span class="o">=</span>
+  <span class="k">match</span> <span onmouseout="hideTip(event, 'fs7', 10)" onmouseover="showTip(event, 'fs7', 10)" class="i">plants</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="f">filter</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="i">p</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="i">p</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 15)" onmouseover="showTip(event, 'fs6', 15)" class="i">HasBred</span> <span class="o">=</span> <span class="k">false</span>) <span class="k">with</span>
+  | [] <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="p">None</span>
+  | [_] <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="p">None</span>
+  | <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="i">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="p">Some</span>(<span onmouseout="hideTip(event, 'fs12', 20)" onmouseover="showTip(event, 'fs12', 20)" class="i">x</span>, <span onmouseout="hideTip(event, 'fs7', 21)" onmouseover="showTip(event, 'fs7', 21)" class="i">plants</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 22)" onmouseover="showTip(event, 'fs8', 22)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 23)" onmouseover="showTip(event, 'fs9', 23)" class="f">filter</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs10', 24)" onmouseover="showTip(event, 'fs10', 24)" class="i">p</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs10', 25)" onmouseover="showTip(event, 'fs10', 25)" class="i">p</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 26)" onmouseover="showTip(event, 'fs6', 26)" class="i">HasBred</span>))
+
+<span class="c">// Splice a list into a tuple of (itemAtIndex, restOfList)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="f">splice</span> <span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="i">index</span> (<span onmouseout="hideTip(event, 'fs16', 29)" onmouseover="showTip(event, 'fs16', 29)" class="i">list</span><span class="o">:</span><span class="o">&#39;</span><span class="i">T</span> <span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="t">list</span>) <span class="o">=</span>
+  (
+    <span onmouseout="hideTip(event, 'fs16', 31)" onmouseover="showTip(event, 'fs16', 31)" class="i">list</span><span class="o">.</span>[<span onmouseout="hideTip(event, 'fs15', 32)" onmouseover="showTip(event, 'fs15', 32)" class="i">index</span>],
+    <span onmouseout="hideTip(event, 'fs16', 33)" onmouseover="showTip(event, 'fs16', 33)" class="i">list</span><span class="o">.</span>[<span class="n">0..</span><span onmouseout="hideTip(event, 'fs15', 34)" onmouseover="showTip(event, 'fs15', 34)" class="i">index</span><span class="o">-</span><span class="n">1</span>] <span class="o">@</span> <span onmouseout="hideTip(event, 'fs16', 35)" onmouseover="showTip(event, 'fs16', 35)" class="i">list</span><span class="o">.</span>[<span onmouseout="hideTip(event, 'fs15', 36)" onmouseover="showTip(event, 'fs15', 36)" class="i">index</span><span class="o">+</span><span class="n">1..</span><span onmouseout="hideTip(event, 'fs16', 37)" onmouseover="showTip(event, 'fs16', 37)" class="i">list</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 38)" onmouseover="showTip(event, 'fs17', 38)" class="i">Length</span><span class="o">-</span><span class="n">1</span>]
+  )
+
+<span class="c">// Breed two plants together, making a new list of plants (bredMother, bredFather, newChild)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 39)" onmouseover="showTip(event, 'fs18', 39)" class="f">breed</span> <span onmouseout="hideTip(event, 'fs19', 40)" onmouseover="showTip(event, 'fs19', 40)" class="i">mother</span> <span onmouseout="hideTip(event, 'fs20', 41)" onmouseover="showTip(event, 'fs20', 41)" class="i">father</span> <span class="o">=</span>
+  [
+    { <span onmouseout="hideTip(event, 'fs19', 42)" onmouseover="showTip(event, 'fs19', 42)" class="i">mother</span> <span class="k">with</span> <span class="i">HasBred</span> <span class="o">=</span> <span class="k">true</span> }
+    { <span onmouseout="hideTip(event, 'fs20', 43)" onmouseover="showTip(event, 'fs20', 43)" class="i">father</span> <span class="k">with</span> <span class="i">HasBred</span> <span class="o">=</span> <span class="k">true</span> }
+    {
+      <span class="i">Productivity</span> <span class="o">=</span> (<span onmouseout="hideTip(event, 'fs19', 44)" onmouseover="showTip(event, 'fs19', 44)" class="i">mother</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 45)" onmouseover="showTip(event, 'fs4', 45)" class="i">Productivity</span> <span class="o">**</span> <span onmouseout="hideTip(event, 'fs20', 46)" onmouseover="showTip(event, 'fs20', 46)" class="i">father</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 47)" onmouseover="showTip(event, 'fs4', 47)" class="i">Productivity</span>) <span class="o">%</span> (<span onmouseout="hideTip(event, 'fs19', 48)" onmouseover="showTip(event, 'fs19', 48)" class="i">mother</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 49)" onmouseover="showTip(event, 'fs4', 49)" class="i">Productivity</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs20', 50)" onmouseover="showTip(event, 'fs20', 50)" class="i">father</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 51)" onmouseover="showTip(event, 'fs4', 51)" class="i">Productivity</span>)
+      <span class="i">HasBred</span> <span class="o">=</span> <span class="k">false</span>
+    }
+  ]
+
+<span class="c">// Simple helper methods to make plants from number values</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 52)" onmouseover="showTip(event, 'fs21', 52)" class="f">makePlants</span> <span onmouseout="hideTip(event, 'fs22', 53)" onmouseover="showTip(event, 'fs22', 53)" class="i">list</span> <span class="o">=</span>
+  <span onmouseout="hideTip(event, 'fs22', 54)" onmouseover="showTip(event, 'fs22', 54)" class="i">list</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 55)" onmouseover="showTip(event, 'fs8', 55)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 56)" onmouseover="showTip(event, 'fs23', 56)" class="f">map</span> (<span onmouseout="hideTip(event, 'fs5', 57)" onmouseover="showTip(event, 'fs5', 57)" class="f">double</span>) <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 58)" onmouseover="showTip(event, 'fs8', 58)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 59)" onmouseover="showTip(event, 'fs23', 59)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 60)" onmouseover="showTip(event, 'fs24', 60)" class="i">i</span> <span class="k">-&gt;</span> {<span class="i">Productivity</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 61)" onmouseover="showTip(event, 'fs24', 61)" class="i">i</span>; <span class="i">HasBred</span> <span class="o">=</span> <span class="k">false</span>})
+</pre>
+</td>
+</tr>
+</table>
+
+<h3>The algorithm</h3>
+
+<p>The big implementation. This is a recursive method that takes in a list of plants, and returns a list of lists of plants (possible outcomes of breedings)
+So if we entered plants with production values of [1,2], we should get [[1,2,2],[1,2,1]], since there are two ways to breed this pair.
+This method is then <code>O(n!^2)</code>, due to combining all permutations of plants, and knowing that order matters.</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="c">// Our recursive method to find all breeding plants</span>
+<span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs25', 62)" onmouseover="showTip(event, 'fs25', 62)" class="f">findAllBreedingOptions</span> <span onmouseout="hideTip(event, 'fs7', 63)" onmouseover="showTip(event, 'fs7', 63)" class="i">plants</span> <span class="o">=</span>
+  <span onmouseout="hideTip(event, 'fs26', 64)" onmouseover="showTip(event, 'fs26', 64)" class="i">seq</span> {
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs7', 65)" onmouseover="showTip(event, 'fs7', 65)" class="i">plants</span> <span class="k">with</span>
+    | <span onmouseout="hideTip(event, 'fs27', 66)" onmouseover="showTip(event, 'fs27', 66)" class="p">HasUnbred</span> (<span onmouseout="hideTip(event, 'fs28', 67)" onmouseover="showTip(event, 'fs28', 67)" class="i">unbredPlants</span>,<span onmouseout="hideTip(event, 'fs29', 68)" onmouseover="showTip(event, 'fs29', 68)" class="i">bredPlants</span>)  <span class="k">-&gt;</span>
+      <span class="c">// If we have unbred plants, then</span>
+      <span class="c">// yield! is similar to a C# yield, but it returns an Enumerable instead of a single item</span>
+      <span class="k">yield!</span> <span onmouseout="hideTip(event, 'fs26', 69)" onmouseover="showTip(event, 'fs26', 69)" class="i">seq</span> {
+        <span class="k">for</span> <span onmouseout="hideTip(event, 'fs30', 70)" onmouseover="showTip(event, 'fs30', 70)" class="i">i</span> <span class="o">=</span> <span class="n">0</span> <span class="k">to</span> <span onmouseout="hideTip(event, 'fs28', 71)" onmouseover="showTip(event, 'fs28', 71)" class="i">unbredPlants</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 72)" onmouseover="showTip(event, 'fs17', 72)" class="i">Length</span> <span class="o">-</span> <span class="n">1</span> <span class="k">do</span>
+          <span class="k">for</span> <span onmouseout="hideTip(event, 'fs31', 73)" onmouseover="showTip(event, 'fs31', 73)" class="i">j</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 74)" onmouseover="showTip(event, 'fs30', 74)" class="i">i</span> <span class="o">+</span> <span class="n">1</span> <span class="k">to</span> <span onmouseout="hideTip(event, 'fs28', 75)" onmouseover="showTip(event, 'fs28', 75)" class="i">unbredPlants</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 76)" onmouseover="showTip(event, 'fs17', 76)" class="i">Length</span> <span class="o">-</span> <span class="n">1</span> <span class="k">do</span>
+            <span class="c">// For each pair of unbred plants, splice them out of all unbred plants</span>
+            <span class="k">let</span> (<span onmouseout="hideTip(event, 'fs32', 77)" onmouseover="showTip(event, 'fs32', 77)" class="i">unbredTwo</span>,<span onmouseout="hideTip(event, 'fs33', 78)" onmouseover="showTip(event, 'fs33', 78)" class="i">tempUnbred</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs28', 79)" onmouseover="showTip(event, 'fs28', 79)" class="i">unbredPlants</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 80)" onmouseover="showTip(event, 'fs14', 80)" class="f">splice</span> <span onmouseout="hideTip(event, 'fs31', 81)" onmouseover="showTip(event, 'fs31', 81)" class="i">j</span>
+            <span class="k">let</span> (<span onmouseout="hideTip(event, 'fs34', 82)" onmouseover="showTip(event, 'fs34', 82)" class="i">unbredOne</span>,<span onmouseout="hideTip(event, 'fs35', 83)" onmouseover="showTip(event, 'fs35', 83)" class="i">unbred</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 84)" onmouseover="showTip(event, 'fs33', 84)" class="i">tempUnbred</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 85)" onmouseover="showTip(event, 'fs14', 85)" class="f">splice</span> <span onmouseout="hideTip(event, 'fs30', 86)" onmouseover="showTip(event, 'fs30', 86)" class="i">i</span>
+            <span class="c">// Then, breed them in both orders (using one as a mother, then the other)</span>
+            <span class="k">yield!</span> (<span onmouseout="hideTip(event, 'fs29', 87)" onmouseover="showTip(event, 'fs29', 87)" class="i">bredPlants</span> <span class="o">@</span> <span onmouseout="hideTip(event, 'fs35', 88)" onmouseover="showTip(event, 'fs35', 88)" class="i">unbred</span> <span class="o">@</span> <span onmouseout="hideTip(event, 'fs18', 89)" onmouseover="showTip(event, 'fs18', 89)" class="f">breed</span> <span onmouseout="hideTip(event, 'fs34', 90)" onmouseover="showTip(event, 'fs34', 90)" class="i">unbredOne</span> <span onmouseout="hideTip(event, 'fs32', 91)" onmouseover="showTip(event, 'fs32', 91)" class="i">unbredTwo</span>) <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 92)" onmouseover="showTip(event, 'fs25', 92)" class="f">findAllBreedingOptions</span>
+            <span class="k">yield!</span> (<span onmouseout="hideTip(event, 'fs29', 93)" onmouseover="showTip(event, 'fs29', 93)" class="i">bredPlants</span> <span class="o">@</span> <span onmouseout="hideTip(event, 'fs35', 94)" onmouseover="showTip(event, 'fs35', 94)" class="i">unbred</span> <span class="o">@</span> <span onmouseout="hideTip(event, 'fs18', 95)" onmouseover="showTip(event, 'fs18', 95)" class="f">breed</span> <span onmouseout="hideTip(event, 'fs32', 96)" onmouseover="showTip(event, 'fs32', 96)" class="i">unbredTwo</span> <span onmouseout="hideTip(event, 'fs34', 97)" onmouseover="showTip(event, 'fs34', 97)" class="i">unbredOne</span>) <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 98)" onmouseover="showTip(event, 'fs25', 98)" class="f">findAllBreedingOptions</span>
+      }
+    | _ <span class="k">-&gt;</span>
+      <span class="c">// if there aren&#39;t any unbred plants, we&#39;re done. Let&#39;s just return the resutls</span>
+      <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs7', 99)" onmouseover="showTip(event, 'fs7', 99)" class="i">plants</span>
+  }
+</pre>
+</td>
+</tr>
+</table>
+
+<h3>Execution</h3>
+
+<p>On my machine, 6 plants take <code>.5 seconds</code> to execute (<code>n*518,400</code> calculations)</p>
+
+<p>Let's examine memory consumption for a purely immutable model:</p>
+
+<p>Since each record takes double (<code>8 bytes</code>) and bool (<code>1 byte</code>) of space, that means that a CandyCanePlant is <code>9 bytes</code>.
+(Weirdly enough, F# optimizes this record to be 8 bytes, not 9. I am confused)
+A list in F# is a linked list, meaning it will add another <code>2 bytes</code> (I'm using 64 bit code here) to each node.</p>
+
+<p>Each result is <code>11 plants</code>, and we have a total of <code>86,400</code> result options produced.</p>
+
+<h4>Memory footprint</h4>
+
+<ul>
+<li>N plant list memory size = <code>(N*2-1) * 8 bytes / plant + (N*2-1) * 2 bytes / plant link = 10*(N*2-1)</code> bytes per result.</li>
+<li>Number of results = <code>N * (N-1)!^2</code></li>
+<li>Total memory footprint: <code>N * (N-1)!^2 * (N*2-1) * 10 = 10 * (N*2 - 1) * N!^2/2</code></li>
+</ul>
+
+<p>This is:</p>
+
+<ul>
+<li><code>.25 Megabytes</code> for 5 plants</li>
+<li><code>9.06 Megabytes</code> for 6 plants</li>
+<li><code>450 Megabytes</code> for 7 plants</li>
+<li><code>227.5 Terabytes</code> for 10 plants</li>
+</ul>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="prep">#time</span>
+[<span class="n">1..</span><span class="n">6</span>] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 100)" onmouseover="showTip(event, 'fs21', 100)" class="f">makePlants</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 101)" onmouseover="showTip(event, 'fs25', 101)" class="f">findAllBreedingOptions</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs36', 102)" onmouseover="showTip(event, 'fs36', 102)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 103)" onmouseover="showTip(event, 'fs37', 103)" class="f">sortBy</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs38', 104)" onmouseover="showTip(event, 'fs38', 104)" class="i">l</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs38', 105)" onmouseover="showTip(event, 'fs38', 105)" class="i">l</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 106)" onmouseover="showTip(event, 'fs8', 106)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 107)" onmouseover="showTip(event, 'fs39', 107)" class="f">sumBy</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs40', 108)" onmouseover="showTip(event, 'fs40', 108)" class="i">c</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs40', 109)" onmouseover="showTip(event, 'fs40', 109)" class="i">c</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 110)" onmouseover="showTip(event, 'fs4', 110)" class="i">Productivity</span>))
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs36', 111)" onmouseover="showTip(event, 'fs36', 111)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 112)" onmouseover="showTip(event, 'fs41', 112)" class="f">rev</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs36', 113)" onmouseover="showTip(event, 'fs36', 113)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs42', 114)" onmouseover="showTip(event, 'fs42', 114)" class="f">head</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<p>Timing result: <code>Real: 00:00:00.627, CPU: 00:00:00.609, GC gen0: 27, gen1: 8, gen2: 1</code></p>
+
+        </div>
+      </div>
+      <div class="span3">
+        <ul id="menu" class="nav nav-list">
+          <li class="nav-header">Challenges</li>
+          <li><a href="/">Home</a></li>
+          <li class="divider"></li>
+          <li><a href="/challenge-1">Challenge 1 - Fibonacci</a></li>
+          <li><a href="/challenge-2">Challenge 2 - Hashing</a></li>
+          <li><a href="/challenge-3">Challenge 3 - Repeating Events</a></li>
+          <li><a href="/challenge-14">Challenge 14 - Political Finances</a></li>
+          <li><a href="/challenge-31">Challenge 31 - Candy Cane Plants</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

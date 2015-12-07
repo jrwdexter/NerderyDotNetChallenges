@@ -1,5 +1,6 @@
 source https://nuget.org/api/v2
 
+nuget CsQuery
 nuget FsLab
 nuget FSharp.Formatting
 nuget Suave

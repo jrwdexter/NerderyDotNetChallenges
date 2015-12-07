@@ -30,8 +30,8 @@ Set some constants up.
 *)
 
 let baseUrl = "http://api.nytimes.com/svc/elections/us/v3/finances/2012"
-// let apiKey = "3938ef998ede56fd9ba55e3b2ccefa37:16:72625105"
-let apiKey = "316ed00bf4b54d8ba9a625e84f78d80a:12:72637909"
+let apiKey = "3938ef998ede56fd9ba55e3b2ccefa37:16:72625105"
+// let apiKey = "316ed00bf4b54d8ba9a625e84f78d80a:12:72637909"
 
 let states = ["AL";"AK";"AZ";"AR";"CA";"CO";"CT";"DE";"FL";"GA";"HI";
               "ID";"IL";"IN";"IA";"KS";"KY";"LA";"ME";"MD";"MA";"MI";
@@ -48,9 +48,9 @@ We'll setup 2 schemas (types) to query against: **broad** candidate information,
 Doing this gives strongly typed intellisense-capable classes which can load information directly from the API.
 *)
 let [<Literal>] candidateUrl = "http://api.nytimes.com/svc/elections/us/v3/finances/\
-2012/seats/MN.json?api-key=316ed00bf4b54d8ba9a625e84f78d80a:12:72637909"
+2012/seats/MN.json?api-key=3938ef998ede56fd9ba55e3b2ccefa37:16:72625105"
 let [<Literal>] detailsUrl = "http://api.nytimes.com/svc/elections/us/v3/finances/\
-2012/candidates/H2MN07097.json?api-key=316ed00bf4b54d8ba9a625e84f78d80a:12:72637909"
+2012/candidates/H2MN07097.json?api-key=3938ef998ede56fd9ba55e3b2ccefa37:16:72625105"
 type candidateCollection = JsonProvider<candidateUrl>
 type candidateDetailsCollection = JsonProvider<detailsUrl>
 
